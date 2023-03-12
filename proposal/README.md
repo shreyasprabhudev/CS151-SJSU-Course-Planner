@@ -2,7 +2,7 @@
 SJSU Course Planner 
 
 # Team Information
-Team #5: Natalie Kao, Jisoo Kim, Shreyas Prabhudev
+Team #5: Natalie Kao, Jisoo Kim, Shreyas Prabhudev <br />
 Team member working on the proposal: Natalie Kao, Jisoo Kim, Shreyas Prabhudev
 
 # Problem/issue to resolve
@@ -24,41 +24,41 @@ One unique function that this planner has is that the user can drag-and-drop the
 
 # Operations:
 Potential Classes [1]:
-*Administration: oversees the entire course planner and has access to all permissions to edit professors and/or students
-*Advisor: can assist students with planning out courses by editing their plans but has no additional permissions
-*Student: can edit their own course plan but has no additional permissions
-*Professor: can edit the courses they are teaching but does not have any other permissions
-*Special Operation: drag-and-drop feature for each student according to their major to see which classes are mandatory to take. 
+* Administration: oversees the entire course planner and has access to all permissions to edit professors and/or students
+* Advisor: can assist students with planning out courses by editing their plans but has no additional permissions
+* Student: can edit their own course plan but has no additional permissions
+* Professor: can edit the courses they are teaching but does not have any other permissions
+* Special Operation: drag-and-drop feature for each student according to their major to see which classes are mandatory to take. 
 
 As students, they will be able to: 
-*See the list of courses that are organized by department and course number
-*See detailed information about each course
-*Includes prerequisite, objectives, required texts, when the course is offered (Fall, Winter, Spring, Summer), and units. See past syllabus for each course & Professor’s name for each course. Total estimate amount of seats available for each course 
-*Able to see mandatory classes left to take in order to graduate (drag & drop feature)
-*Add and delete courses 
-*Have student ID for login and password (attribute), enter estimate graduation sem/year
-*Able to see who their assigned advisor is depending on student’s last 2 digit of their ID
+* See the list of courses that are organized by department and course number
+* See detailed information about each course
+* Includes prerequisite, objectives, required texts, when the course is offered (Fall, Winter, Spring, Summer), and units. See past syllabus for each course & Professor’s name for each course. Total estimate amount of seats available for each course 
+* Able to see mandatory classes left to take in order to graduate (drag & drop feature)
+* Add and delete courses 
+* Have student ID for login and password (attribute), enter estimate graduation sem/year
+* Able to see who their assigned advisor is depending on student’s last 2 digit of their ID
 
 As professors, they will be able to: 
-*Have teacher ID for login and password 
-*Update their name under the course that they will be teaching (past records will be default)
-*Have ability to add their syllabus and required text
-*See all the courses offered for each department 
+* Have teacher ID for login and password 
+* Update their name under the course that they will be teaching (past records will be default)
+* Have ability to add their syllabus and required text
+* See all the courses offered for each department 
 
 As advisors, they will be able to: 
-*Have advisor ID for login and password 
-*Have access to a page to enter one specific Student ID number 
-*Allow edits to happen for that specific student 
-*See all the assigned students planner 
-*See all the courses offered for each department 
+* Have advisor ID for login and password 
+* Have access to a page to enter one specific Student ID number 
+* Allow edits to happen for that specific student 
+* See all the assigned students planner 
+* See all the courses offered for each department 
 
 As administrations, they will be able to: 
-*Have administration ID for login and password 
-*Ability to create/delete accounts for professors, students, and advisors 
-*Ability to add/delete courses
-*As well as all the required information for each courses: prerequisite, objectives, required texts, when the course is offered, and units
-*Ability to add Professors under each courses
-*Ability to see and edit all student’s planner 
+* Have administration ID for login and password 
+* Ability to create/delete accounts for professors, students, and advisors 
+* Ability to add/delete courses
+* As well as all the required information for each courses: prerequisite, objectives, required texts, when the course is offered, and units
+* Ability to add Professors under each courses
+* Ability to see and edit all student’s planner 
 
 Other References:
 [1] https://1000projects.org/course-planning-project-java.html
