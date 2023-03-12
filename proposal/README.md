@@ -10,7 +10,7 @@ SJSU students need a better way to plan and organize their courses to complete t
 	
 # Previous works
 There are some existing course planning websites that provide similar functionality. However, they may not be tailored to the specific needs and requirements of the college or university. Currently, through myPlanner, adding and taking out classes are taking too long to process and are not flexible to move around, and Professor names are not displayed for each course.
-Existing solution exists in MySJSU
+Existing solution exists in [MySJSU](https://cmsweb.cms.sjsu.edu/psc/CSJPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.PT_LANDINGPAGE.GBL).
 
 # Assumptions / Operating Environments / Intended Usage:
 The course planning website will be designed for SJSU students, but faculty members can also have access to it as well. The website will be accessible via a web browser and the website will be integrated with the SJSU course catalog. Log-ins are required depending on if you are a student or faculty member. 
