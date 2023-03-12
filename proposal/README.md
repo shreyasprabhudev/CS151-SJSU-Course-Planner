@@ -12,7 +12,7 @@ SJSU students need a better way to plan and organize their courses to complete t
 There are some existing course planning websites that provide similar functionality. However, they may not be tailored to the specific needs and requirements of the college or university. Currently, through myPlanner, adding and taking out classes are taking too long to process and are not flexible to move around, and Professor names are not displayed for each course.
 Existing solution exists in [MySJSU](https://cmsweb.cms.sjsu.edu/psc/CSJPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.PT_LANDINGPAGE.GBL).
 
-# Assumptions / Operating Environments / Intended Usage:
+# Assumptions / Operating Environments / Intended Usage
 The course planning website will be designed for SJSU students, but faculty members can also have access to it as well. The website will be accessible via a web browser and the website will be integrated with the SJSU course catalog. Log-ins are required depending on if you are a student or faculty member. 
 
 # High-level description of Solution (plan, approach, etc) 
@@ -22,7 +22,7 @@ The proposed course planning website will provide a comprehensive platform for s
 Our website provides a quicker and more efficient platform for students to see all the class description, availability, syllabus, and pre reqs before adding the class. For example, students will no longer need to email specific professors to figure out if he/she is teaching that specific class or research separately to find syllabus. It will add, update, and delete students, professors, subjects/classes and be up to date if any changes are made. 
 One unique function that this planner has is that the user can drag-and-drop their classes into certain “slots” for every semester, allowing them to visually see which required classes they have added and which ones they have left. The drag-and-drop feature allows them to quickly and seamlessly make edits to their schedule.
 
-# Operations:
+# Operations
 Potential Classes [1]:
 * Administration: oversees the entire course planner and has access to all permissions to edit professors and/or students
 * Advisor: can assist students with planning out courses by editing their plans but has no additional permissions
