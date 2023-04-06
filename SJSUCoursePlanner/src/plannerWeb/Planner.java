@@ -7,8 +7,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.lang.model.util.ElementScanner14;
 import javax.swing.*;
-import javax.swing.JFrame;
 
 public class Planner implements ActionListener {
 
@@ -39,7 +39,7 @@ public class Planner implements ActionListener {
 		pageTitle.setHorizontalAlignment(JLabel.CENTER);
 		panel.add(pageTitle);
 
-		userLabel = new JLabel("Email");
+		userLabel = new JLabel("SJSU ID Number");
 		userLabel.setBounds(frame.getWidth() / 2 - 150, frame.getHeight() / 2 - 100, 300, 40);
 		userLabel.setFont(new Font("Arial", Font.PLAIN, 25));
 		userLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -66,7 +66,18 @@ public class Planner implements ActionListener {
 		button = new JButton("Login");
 		button.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 + 200, 200, 40);
 		button.setFont(new Font("Arial", Font.PLAIN, 25));
-		button.addActionListener(new Planner());
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String user = userText.getText();
+				String password = passwordText.getText();
+				System.out.println(user + ", " + password);
+		
+				frame.setVisible(false);
+				frame.dispose();
+
+				createScreen(user, password);
+			}
+		});
 		panel.add(button);
 
 		success = new JLabel("");
@@ -79,22 +90,100 @@ public class Planner implements ActionListener {
 
 	}
 
-	// button action is tied to this code
+	public static String userValidation(String user, String password){
+		if(user.equals("000000000")){
+			return "Admin";
+		}
+		else if(user.length() == 9 && user.substring(0,7).equals("0000000")){
+			return "Professor";
+		}
+		else if(user.length() == 9 && user.substring(0,5).equals("00000")){
+			return "Advisor";
+		}
+		else{
+			return "Student";
+		}
+	}
+
+	private static void createScreen(String user, String password){
+		if(userValidation(user, password).equals("Student"))
+			createStudentFrame();
+		else if(userValidation(user, password).equals("Advisor"))
+			createAdvisorFrame();
+	}
+
+	private static void createStudentFrame(){
+		JFrame frame = new JFrame();
+		frame.setSize(1400, 800);
+		frame.setTitle("Welcome Student!");
+		frame.setResizable(false);
+		frame.getContentPane().setBackground(Color.WHITE);
+
+		String data[][]={ {"CS 146","Data Structures and Algorithms","3"},    
+                          {"CS 147","Computer Architecture","3"},    
+                          {"CS 149","Operating Systems","3"},
+						  {"CS 151","Object-Oriented Design","3"},    
+                          {"CS 152","Programming Paradigms","3"},
+						  {"CS 154","Formal Languages and Computability","3"},    
+                          {"CS 157A","Introduction to Database Management Systems","3"},
+						  {"CS 160","Software Engineering","3"},
+						  {"CS 166","Information Security","3"}};    
+    	String column[]={"Course ID","Course Name","Units"};
+
+		JTable studentTable = new JTable(data, column);
+		studentTable.setBounds(500, 500, 500, 500);
+		studentTable.getTableHeader().setReorderingAllowed(false);
+		studentTable.getTableHeader().setResizingAllowed(false);
+		JScrollPane sp = new JScrollPane(studentTable);
+		frame.add(sp);
+
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
+
+	private static void createAdvisorFrame(){
+		JFrame frame = new JFrame();
+		JPanel advisorPanel = new JPanel();
+		frame.setSize(1400, 800);
+		frame.setTitle("Welcome Advisor!");
+		frame.setResizable(false);
+		frame.getContentPane().setBackground(Color.WHITE);
+		frame.add(advisorPanel);
+		advisorPanel.setLayout(null);
+		
+		JLabel searchStudentID = new JLabel("Enter Student ID Number");
+		searchStudentID.setBounds(frame.getWidth() / 2 - 150, frame.getHeight() / 2 - 100, 300, 40);
+		searchStudentID.setFont(new Font("Arial", Font.PLAIN, 25));
+		searchStudentID.setHorizontalAlignment(JLabel.CENTER);
+		advisorPanel.add(searchStudentID);
+
+		JTextField searchStudentIDText = new JTextField(20);
+		searchStudentIDText.setBounds(frame.getWidth() / 2 - 150, frame.getHeight() / 2 - 25, 300, 40);
+		searchStudentIDText.setFont(new Font("Arial", Font.PLAIN, 25));
+		searchStudentIDText.setHorizontalAlignment(JTextField.CENTER);
+		advisorPanel.add(searchStudentIDText);
+
+		JButton viewPlannerButton = new JButton("View Planner");
+		viewPlannerButton.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 + 50, 200, 40);
+		viewPlannerButton.setFont(new Font("Arial", Font.PLAIN, 25));
+
+		viewPlannerButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				frame.dispose();		
+                createStudentFrame();
+            }
+        });
+		advisorPanel.add(viewPlannerButton);
+
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
+
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		String user = userText.getText();
-		String password = passwordText.getText();
-		System.out.println(user + ", " + password);
-
-		// Create a new JFrame object
-		JFrame newFrame = new JFrame();
-		newFrame.setTitle("Welcome");
-		newFrame.setSize(500, 500);
-		newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		newFrame.getContentPane().setBackground(new Color(0xF5F5DC));
-
-		// Display the new JFrame
-		newFrame.setVisible(true);
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
 	}
 
 }
