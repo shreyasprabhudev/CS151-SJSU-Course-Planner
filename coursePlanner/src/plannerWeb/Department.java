@@ -1,4 +1,4 @@
-package planner;
+package plannerWeb;
 
 public class Department {
 
