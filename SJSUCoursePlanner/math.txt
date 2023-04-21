@@ -1,0 +1,55 @@
+MAJOR REQUIREMENTS (46 UNITS)
+Core Courses (16 units)
+MATH 30 - Calculus I (B4) unit(s) 3
+MATH 30X may be used instead of MATH 30. 
+MATH 31 - Calculus II (B4) unit(s) 4
+MATH 31X may be used instead of MATH 31.
+MATH 32 - Calculus III (B4) unit(s) 3
+MATH 32X may be used instead of MATH 32.
+MATH 39 - Linear Algebra I unit(s) 3
+MATH 42 - Discrete Mathematics unit(s) 3
+MATH 42X may be used instead of MATH 42.
+Upper Division Core (15 units)
+MATH 108 - Introduction to Abstract Mathematics and Proofs unit(s) 3
+MATH 128A - Abstract Algebra I unit(s) 3
+MATH 131A - Introduction to Analysis unit(s) 3
+COMPLETE ONE COURSE (3 UNITS):
+MATH 112 - Vector Calculus unit(s) 3
+MATH 113 - Differential Geometry unit(s) 3
+MATH 115 - Modern Geometry and Transformations unit(s) 3
+MATH 138 - Complex Variables unit(s) 3
+COMPLETE ONE COURSE (3 UNITS):
+MATH 128B - Abstract Algebra II unit(s) 3
+MATH 129B - Linear Algebra II unit(s) 3
+MATH 131B - Introduction to Real Variables unit(s) 3
+Upper Division Mathematics Elective (15 units)
+MATH 104 - History of Mathematics unit(s) 3
+MATH 112 - Vector Calculus unit(s) 3
+MATH 113 - Differential Geometry unit(s) 3
+MATH 115 - Modern Geometry and Transformations unit(s) 3
+MATH 126 - Theory of Numbers unit(s) 3
+MATH 128B - Abstract Algebra II unit(s) 3
+MATH 129B - Linear Algebra II unit(s) 3
+MATH 131B - Introduction to Real Variables unit(s) 3
+MATH 132 - Advanced Calculus unit(s) 3
+MATH 133B - Partial Differential Equations unit(s) 3
+MATH 134 - Ord. Diff. Eqns and Dynamical Systems unit(s) 3
+MATH 138 - Complex Variables unit(s) 3
+MATH 142 - Introduction to Combinatorics unit(s) 3
+MATH 143C - Numerical Analysis and Scientific Computing unit(s) 3
+MATH 143M - Numerical Analysis and Scientific Computing unit(s) 3
+MATH 146 - An Introduction to Mathematical Cryptography unit(s) 3
+MATH 150 - Theory of Interest unit(s) 3
+MATH 161A - Applied Probability and Statistics I unit(s) 3
+MATH 161B - Applied Probability and Statistics II unit(s) 3
+MATH 162 - Statistics for Bioinformatics unit(s) 3
+MATH 163 - Probability Theory unit(s) 3
+MATH 164 - Mathematical Statistics unit(s) 3
+MATH 170 - Mathematical Modeling for the Life Sciences unit(s) 3
+or
+MATH 177 - Linear and Non-Linear Optimization unit(s) 3
+MATH 179 - Introduction to Graph Theory unit(s) 3
+MATH 180 - Individual Studies (Requires prior approval) unit(s) 1-4
+MATH 180H - Individual Studies for Honors (Requires prior approval) unit(s) 3
+MATH 180R - Undergraduate Research in Mathematics (Requires prior approval) unit(s) 1-4
+MATH 203 - Applied Mathematics, Computation, and Statistics Projects unit(s) 3

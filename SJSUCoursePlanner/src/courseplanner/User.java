@@ -1,6 +1,4 @@
-package plannerWeb;
-
-import java.util.ArrayList;
+package courseplanner;
 
 public abstract class User {
 	private String firstName;
@@ -52,8 +50,6 @@ public abstract class User {
 		this.password = password;
 	}
 
-	public abstract boolean login();
 
-	public abstract void viewCourses();
 
 }
