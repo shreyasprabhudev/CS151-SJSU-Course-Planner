@@ -1,0 +1,25 @@
+MAJOR REQUIREMENTS (67 UNITS)
+Core Courses (11 units)
+ENGR 10 - Introduction to Engineering (E) unit(s) 3
+ME 20 - Design and Graphics unit(s) 2
+MATE 25 - Introduction to Materials unit(s) 3
+CMPE 30 - Programming Concepts and Methodology unit(s) 3
+Major Courses (50 units)
+ISE 102 - Engineering Economic Systems unit(s) 3
+ISE 105 - Introduction to Systems Engineering and Activity Costing unit(s) 3
+ISE 115 - Lean Integrated Manufacturing unit(s) 3
+ISE 120 - Work Methods Design and Measurement unit(s) 3
+ISE 130 - Engineering Probability and Statistics unit(s) 3
+ISE 131 - Statistical Process Control and Improvement unit(s) 3
+ISE 135 - Design of Experiments unit(s) 3
+ISE 140 - Operations Planning and Control unit(s) 3
+ISE 142 - Service Systems Engineering and Management unit(s) 3
+ISE 151 - Introduction to Engineering Management unit(s) 3
+ISE 155 - Supply Chain Engineering unit(s) 3
+ISE 167 - System Simulation unit(s) 3
+ISE 170 - Operation Research unit(s) 3
+ISE 194 - Analytics Workshop unit(s) 1
+ISE 195A - Senior Industrial Engineering Design I unit(s) 1
+ISE 195B - Senior Industrial Engineering Design II unit(s) 3
+ENGR 100W - Engineering Reports (Z+R) unit(s) 3
+CMPE 131 - Software Engineering I unit(s) 3
