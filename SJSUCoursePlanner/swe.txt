@@ -1,0 +1,31 @@
+MAJOR PREPARATION (33 UNITS)
+Complete One Course From:
+MATH 33LA - Differential Equations and Linear Algebra unit(s) 3
+MATH 142 - Introduction to Combinatorics unit(s) 3
+Complete One Course From:
+ISE 130 - Engineering Probability and Statistics unit(s) 3
+MATH 161A - Applied Probability and Statistics I unit(s) 3
+MAJOR REQUIREMENTS (66 UNITS)
+Core Courses (11 units)
+CS 46A - Introduction to Programming unit(s) 4
+CS 46B - Introduction to Data Structures unit(s) 4
+ENGR 10 - Introduction to Engineering (E) unit(s) 3
+Major Courses (49 units)
+CMPE 102 - Assembly Language Programming unit(s) 3
+CMPE 120 - Computer Organization and Architecture unit(s) 3
+CMPE 131 - Software Engineering I unit(s) 3
+CMPE 133 - Software Engineering II unit(s) 3
+CMPE 148 - Computer Networks I unit(s) 3
+CMPE 165 - Software Engineering Process Management unit(s) 3
+CMPE 172 - Enterprise Software Platforms unit(s) 3
+CMPE 187 - Software Quality Engineering unit(s) 3
+CMPE 195A - Senior Design Project I (S) unit(s) 2
+CMPE 195B - Senior Design Project II (V) unit(s) 3
+ENGR 195A - Global and Social Issues in Engineering (S) unit(s) 1
+ENGR 195B - Global and Social Issues in Engineering (V) unit(s) 1
+CS 146 - Data Structures and Algorithms unit(s) 3
+CS 149 - Operating Systems unit(s) 3
+CS 151 - Object-Oriented Design unit(s) 3
+CS 157A - Introduction to Database Management Systems unit(s) 3
+CS 166 - Information Security unit(s) 3
+ISE 164 - Computer and Human Interaction unit(s) 3

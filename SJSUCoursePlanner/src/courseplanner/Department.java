@@ -1,10 +1,10 @@
-package plannerWeb;
+package courseplanner;
 
 import java.util.ArrayList;
 
 public class Department {
 	private String departName;
-	ArrayList<Course> courseList;
+	ArrayList<CourseSystem> courseList;
 
 	public Department() {
 
