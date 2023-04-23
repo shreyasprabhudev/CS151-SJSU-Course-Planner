@@ -1,0 +1,38 @@
+MAJOR REQUIREMENTS (66 UNITS)
+Core Courses (16 units)
+EE 98 - Introduction to Circuit Analysis unit(s) 3
+ENGR 10 - Introduction to Engineering (E) unit(s) 3
+ENGR 100W - Engineering Reports (Z+R) unit(s) 3
+MATE 25 - Introduction to Materials unit(s) 3
+AE 20 - Computer-Aided Design for Aerospace Engineers unit(s) 2
+AE 30 - Computer Programming for Aerospace Engineers unit(s) 2
+Required Courses (39 units)
+AE 112 - Aerospace Structural Analysis I unit(s) 4
+AE 114 - Aerospace Structural Analysis II unit(s) 3
+AE 138 - Vector-Based Dynamics for Aerospace Applications unit(s) 3
+AE 140 - Rigid Body Dynamics unit(s) 3
+AE 157 - Aerospace Automatic Control Systems Design unit(s) 3
+AE 160 - Aerodynamics I unit(s) 3
+AE 162 - Aerodynamics II unit(s) 3
+AE 164 - Aerothermodynamics unit(s) 5
+AE 165 - Aerospace Flight Mechanics unit(s) 3
+AE 167 - Aerospace Propulsion unit(s) 3
+AE 168 - Aerospace Vehicle Dynamics and Control unit(s) 3
+AE 169 - Computational Fluid Dynamics unit(s) 3
+Capstone (8 units)
+OPTION 1: AIRCRAFT DESIGN
+AE 171A - Aircraft Design I (S) unit(s) 3
+AE 171B - Aircraft Design II (V) unit(s) 3
+ENGR 195A - Global and Social Issues in Engineering (S) unit(s) 1
+ENGR 195B - Global and Social Issues in Engineering (V) unit(s) 1
+OPTION 2: SPACECRAFT DESIGN
+AE 172A - Spacecraft Design I (S) unit(s) 3
+AE 172B - Spacecraft Design II (V) unit(s) 3
+ENGR 195A - Global and Social Issues in Engineering (S) unit(s) 1
+ENGR 195B - Global and Social Issues in Engineering (V) unit(s) 1
+Technical Electives (3 units)
+AE 110 - Space Systems Engineering unit(s) 3
+AE 142 - Astrodynamics unit(s) 3
+AE 166 - Rocketry unit(s) 3
+AE 173 - Design of Unmanned Aerial Vehicles unit(s) 3
+AE 149 - Advanced Dynamics and Simulation unit(s) 3

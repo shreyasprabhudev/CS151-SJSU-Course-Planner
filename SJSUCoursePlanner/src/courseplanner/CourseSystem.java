@@ -1,6 +1,6 @@
-package plannerWeb;
+package courseplanner;
 
-public class Course {
+public class CourseSystem {
 	private String dptRelatedCourses;
 	private String courseNum;
 	private String courseName;
@@ -11,7 +11,5 @@ public class Course {
 	private Professor professor;
 	private int units;
 	private String offeredTerm;
-	
-	
 
 }

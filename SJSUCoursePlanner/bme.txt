@@ -1,0 +1,24 @@
+MAJOR REQUIREMENTS (60 UNITS)
+Core Courses (11 units)
+BME 25 - Introduction to Biomedical Engineering Design unit(s) 2
+BME 65 - Biomedical Applications of Statics unit(s) 3
+ENGR 10 - Introduction to Engineering (E) unit(s) 3
+ENGR 100W - Engineering Reports (Z+R) unit(s) 3
+Major Courses (43 units)
+BME 68 - Biomedical Applications of Metals and Ceramics unit(s) 3
+BME 115 - Foundations of Biomedical Engineering unit(s) 4
+BME 116 - Biosensors and Bioinstrumentation unit(s) 3
+BME 117 - Biotransport Phenomena unit(s) 3
+BME 130 - Numerical Methods in Biomedical Engineering unit(s) 3
+BME 133 - Programming Applications in Biomedical Engineering unit(s) 1
+BME 135 - Biomedical Engineering Design Methods unit(s) 2
+BME 147 - Quantitative and Statistical Methods for Biomedical Engineers unit(s) 3
+BME 165 - Applied Engineering Biomechanics unit(s) 3
+BME 168 - Medical and Biological Polymers unit(s) 3
+BME 174 - Biomedical Regulatory Requirements unit(s) 3
+BME 177 - Physiology for Engineers unit(s) 3
+BME 178 - Biomedical Product Realization unit(s) 3
+BME 198A - Senior Design Project I (S) unit(s) 2
+BME 198B - Senior Design Project II (V) unit(s) 2
+ENGR 195A - Global and Social Issues in Engineering (S) unit(s) 1
+ENGR 195B - Global and Social Issues in Engineering (V) unit(s) 1
