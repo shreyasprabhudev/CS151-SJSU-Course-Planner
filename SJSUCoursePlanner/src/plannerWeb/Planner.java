@@ -15,14 +15,15 @@ import java.util.Random;
 import java.awt.Font;
 import java.awt.Image;
 
-public class Planner {
+public class Planner extends JFrame implements ActionListener{
+	JFrame jFrame;
 
 	public static void main(String[] args) {
-		homePage();
+		new Planner ();
 	}
 
-	public static void homePage() {
-		JFrame jFrame = new JFrame();
+	public Planner() {
+		jFrame = new JFrame();
 		jFrame.setSize(1400, 800);
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jFrame.setResizable(false);
@@ -231,5 +232,19 @@ public class Planner {
 		} else if (password.length() < 8) {
 			throw new Minimum8CharactersRequired();
 		}
+	}
+	
+	public void pageTransition(JFrame before, JFrame after) {
+		after.setVisible(true);
+		this.jFrame.getContentPane().remove(after);
+		before.setVisible(false);
+		this.jFrame.remove(before);
+		this.jFrame.pack();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
