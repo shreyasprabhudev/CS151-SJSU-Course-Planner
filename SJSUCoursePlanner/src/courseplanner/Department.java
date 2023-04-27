@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Department {
 	private String departName;
-	ArrayList<CourseSystem> courseList;
+	ArrayList<PlannerSystem> courseList;
 
 	public Department() {
 

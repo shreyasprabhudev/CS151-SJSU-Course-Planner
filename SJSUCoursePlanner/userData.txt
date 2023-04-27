@@ -1,1 +1,2 @@
 FirstName: Jisoo; LastName: Kim; Email: jisoo.kim01@sjsu.edu; Username: JK-2742; Password: 1234Kim??KK;
+FirstName: Natalie; LastName: Kao; Email: natkao3011@gmail.com; Username: NK-8481; Password: NatalieKao0!;

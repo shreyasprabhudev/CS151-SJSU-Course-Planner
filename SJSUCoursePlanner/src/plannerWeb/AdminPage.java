@@ -25,7 +25,7 @@ public class AdminPage extends JFrame implements ActionListener {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		String[] adminOptions = { "Add User", "Remove User", "Add Course", "Remove Course", "Set Professor for Course",
-				"Add Required Information", "View Student Planner" };
+				"Add Required Information", "View Course Planner" };
 
 		adminOptionsBox = new JComboBox<String>(adminOptions);
 		adminOptionsBox.setBounds(100, 220, 200, 25);
