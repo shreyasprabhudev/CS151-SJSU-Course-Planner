@@ -206,7 +206,7 @@ public class Planner {
 
 	public static void createBackButton(){
 		JButton backButton = new JButton("<");
-		backButton.setBounds(25, 25, 100, 50);
+		backButton.setBounds(25, 25, 75, 50);
 		backButton.setFont(new Font("Arial", Font.PLAIN, 25));
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
