@@ -5,20 +5,20 @@ import java.util.ArrayList;
 public class Student extends User {
 	private String major;
 	private String graduationSemester;
-	private ArrayList<CourseSystem> courseList;
+	private ArrayList<PlannerSystem> courseList;
 	public int graduationYear;
 
 	public Student(String firstName, String lastName, String id, String password) {
 		super(firstName, lastName, id, password);
-		courseList = new ArrayList<CourseSystem>();
+		courseList = new ArrayList<PlannerSystem>();
 
 	}
 
-	public void addCourse(CourseSystem course) {
+	public void addCourse(PlannerSystem course) {
 		courseList.add(course);
 	}
 
-	public void deleteCourse(CourseSystem course) {
+	public void deleteCourse(PlannerSystem course) {
 		courseList.remove(course);
 	}
 
