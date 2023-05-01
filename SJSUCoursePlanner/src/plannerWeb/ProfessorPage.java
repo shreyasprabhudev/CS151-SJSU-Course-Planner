@@ -9,6 +9,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+
 public class ProfessorPage extends JFrame implements ActionListener{
 
 	JComboBox<String> profOptBox;
@@ -56,6 +57,10 @@ public class ProfessorPage extends JFrame implements ActionListener{
 				
 			}
 
+		}
+		if(e.getSource() == profLogoutBtn) {
+			this.removeAll();
+			selectUserTypeScreen();
 		}
 
 	}
