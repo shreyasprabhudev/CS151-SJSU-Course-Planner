@@ -1,0 +1,31 @@
+MAJOR REQUIREMENTS (69 UNITS)
+Core Courses (17 units)
+CE 95 - Theory and Application of Statics unit(s) 3
+EE 98 - Introduction to Circuit Analysis unit(s) 3
+ENGR 10 - Introduction to Engineering (E) unit(s) 3
+MATE 25 - Introduction to Materials unit(s) 3
+ME 20 - Design and Graphics unit(s) 2
+ME 30 - Computer Applications unit(s) 2
+ME 41 - Machine Shop Operations and Safety unit(s) 1
+Major Courses (43 units)
+CE 112 - Mechanics of Materials unit(s) 3
+ENGR 100W - Engineering Reports (Z+R) unit(s) 3
+ME 106 - Fundamentals of Mechatronics Engineering unit(s) 3
+ME 101 - Dynamics  OR
+ME 101H - Honors Dynamics unit(s) 3
+ME 111 - Fluid Mechanics unit(s) 3
+ME 113 - Thermodynamics unit(s) 4
+ME 114 - Heat Transfer unit(s) 3
+ME 115 - Thermal Engineering Laboratory unit(s) 1
+ME 120 - Experimental Methods unit(s) 2
+ME 130 - Applied Engineering Analysis unit(s) 3
+ME 147 - Dynamic Systems Vibration and Control unit(s) 3
+ME 154 - Mechanical Engineering Design unit(s) 4
+ME 195A - Senior Design Project I (S) unit(s) 3
+ME 195B - Senior Design Project II (V) unit(s) 3
+ENGR 195A - Global and Social Issues in Engineering (S) unit(s) 1
+ENGR 195B - Global and Social Issues in Engineering (V) unit(s) 1
+Required Capstone Courses (3 units)
+ME 157 - Mechanical System Design unit(s) 3
+ME 182 - Thermal Systems Design unit(s) 3
+ME 190 - Mechatronics System Design unit(s) 3

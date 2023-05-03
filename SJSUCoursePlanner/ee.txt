@@ -1,0 +1,48 @@
+MAJOR PREPARATION (33 UNITS)
+CHEM 1A - General Chemistry (B1+B3) unit(s) 5
+ENGL 1B - Argument and Analysis (C2) (or equivalent second semester composition course.) unit(s) 3
+MATH 30 - Calculus I
+(B4) (or
+MATH 30X)
+unit(s) 3
+MATH 31 - Calculus II
+(B4) (or 
+MATH 31X)
+unit(s) 4
+MATH 32 - Calculus III
+(B4) (or 
+MATH 32H or MATH 32X)
+unit(s) 3
+MATH 33A - Ordinary Differential Equations for SCI & ENGR  OR
+MATH 33LA - Differential Equations and Linear Algebra
+unit(s) 3
+PHYS 50 - General Physics/Mechanics (B1+B3) unit(s) 4
+PHYS 51 - General Physics/Electricity and Magnetism (B1+B3) unit(s) 4
+PHYS 52 - General Physics/Waves, Light, Heat (B1+B3) unit(s) 4
+MAJOR REQUIREMENTS (69 UNITS)
+Core Courses (13 units)
+EE 30 - Introduction to Programming Micro-Controllers for Electrical Engineering
+EE 97 - Introductory Electrical Engineering Laboratory unit(s) 1
+EE 98 - Introduction to Circuit Analysis unit(s) 3
+ENGR 10 - Introduction to Engineering (E) unit(s) 3
+ENGR 100W - Engineering Reports (Z+R) unit(s) 3
+Major Courses (44 units)
+EE 102 - Probability and Statistics in Electrical unit(s) 3
+EE 110 - Circuits and Systems unit(s) 3
+EE 110L - Continuous and Discrete Time Systems Lab unit(s) 1
+EE 112 - Introduction to Signal Processing unit(s) 3
+EE 118 - Digital Logic Circuit Design unit(s) 4
+EE 120 - Microprocessor Based System Design unit(s) 4
+EE 122 - Electronic Design I unit(s) 4
+EE 124 - Electronic Design II unit(s) 4
+EE 128 - Physical Electronics unit(s) 3
+EE 132 - Theory of Automatic Controls
+OR 
+EE 160 - Principles of Communication Systems  3 unit(s)
+unit(s) 3
+EE 140 - Principles of Electromagnetic Fields unit(s) 3
+EE 198A - Senior Design Project I (S) unit(s) 1
+EE 198B - Senior Design Project II (V) unit(s) 3
+ENGR 195A - Global and Social Issues in Engineering (S) unit(s) 1
+ENGR 195B - Global and Social Issues in Engineering (V) unit(s) 1
+MATE 153 - Electronic, Optical and Magnetic Properties of Materials unit(s) 3
