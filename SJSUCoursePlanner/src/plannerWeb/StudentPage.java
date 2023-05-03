@@ -30,6 +30,8 @@ public class StudentPage extends JFrame implements ActionListener {
 	JLabel studentWelcomeLabel;
 	JButton majorConfirmBtn;
 	JButton stuOptConfirmBtn;
+	JButton stuLogoutBtn;
+	UserInterface frame;
 
 	JMenuItem compSci;
 	JMenuItem elecEng;
@@ -50,8 +52,9 @@ public class StudentPage extends JFrame implements ActionListener {
 	JMenuItem pubHealth;
 	JMenuItem chem;
 
-	StudentPage() {
+	public StudentPage(UserInterface in) {
 
+		frame = in;
 		this.setSize(1400, 800);
 		this.setLayout(null);
 		this.setTitle("Majors");
@@ -90,8 +93,13 @@ public class StudentPage extends JFrame implements ActionListener {
 
 		stuOptConfirmBtn = new JButton("Confirm");
 		stuOptConfirmBtn.addActionListener(this);
-		stuOptConfirmBtn.setBounds(150, 450, 90, 25);
+		stuOptConfirmBtn.setBounds(100, 450, 90, 25);
 		this.add(stuOptConfirmBtn);
+		
+		stuLogoutBtn = new JButton("Logout");
+		stuLogoutBtn.addActionListener(this);
+		stuLogoutBtn.setBounds(210, 450, 90, 25);
+		this.add(stuLogoutBtn);
 		
 		this.setVisible(true);
 
@@ -155,10 +163,12 @@ public class StudentPage extends JFrame implements ActionListener {
 		}
 		if (e.getSource() == stuOptConfirmBtn) {
 			if((String) stuOptBox.getSelectedItem() == "Add course") {
-				
+				frame.studentAddCourse = new StudentAddCourse(frame);
+				frame.pageTransition(frame.studentAddCourse);
 			}
 			else if((String) stuOptBox.getSelectedItem() == "Remove course"){
-				
+				frame.studentRemoveCourse = new StudentRemoveCourse(frame);
+				frame.pageTransition(frame.studentRemoveCourse);
 			}
 			else if((String) stuOptBox.getSelectedItem() == "View Assigned Advisor"){
 			
@@ -193,8 +203,5 @@ public class StudentPage extends JFrame implements ActionListener {
 		}
 	}
 
-	public static void main(String[] args) {
-		new StudentPage();
-	}
 
 }

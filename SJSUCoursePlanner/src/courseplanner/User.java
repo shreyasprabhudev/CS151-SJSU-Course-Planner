@@ -1,6 +1,6 @@
 package courseplanner;
 
-public abstract class User {
+public abstract class User implements Comparable<User> {
 	private String firstName;
 	private String lastName;
 	private String id;
@@ -48,6 +48,10 @@ public abstract class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public int compareTo(User other) {
+		return this.getId().compareTo(other.getId());
 	}
 
 

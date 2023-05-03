@@ -175,10 +175,10 @@ public class Planner {
 						new StudentPage();
 					else if (username.substring(0, 2).equals("UA"))
 						new AdminPage();
-////					else if(username.substring(0,2).equals("SA")) {
-////						new AdvisorPage();
-//					}
-					// successfulLoginScreen(username, fields[2], fields[3], fields[4]);
+				else if(username.substring(0,2).equals("SA")) {
+						new AdvisorPage();
+					}
+					successfulLoginScreen(username, fields[2], fields[3], fields[4]);
 				} else if (output.equals("User does not exist")) {
 					JOptionPane.showMessageDialog(frame,
 							new Exception("This is not a valid username! Please sign up first!"), "Error Loggin In!",

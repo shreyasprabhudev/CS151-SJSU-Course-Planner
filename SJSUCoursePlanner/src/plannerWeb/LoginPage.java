@@ -18,12 +18,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import courseplanner.Controller;
+
 public class LoginPage extends JFrame implements ActionListener {
 	JLabel homePageTitle;
 	JButton signUpButton;
 	JButton logInButton;
+	UserInterface frame;
 
-	LoginPage() {
+	LoginPage(UserInterface in) {
+		frame = in;
 		this.setSize(1400, 800);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -234,10 +238,6 @@ public class LoginPage extends JFrame implements ActionListener {
 				System.out.println(ex);
 			}
 		}
-	}
-
-	public static void main(String[] args) {
-		new LoginPage();
 	}
 
 }
