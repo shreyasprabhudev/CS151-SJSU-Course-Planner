@@ -46,6 +46,7 @@ public class AdminPage extends JFrame implements ActionListener {
 		adminWelcomeLabel.setFont(new Font("Serif", Font.BOLD, 50));
 		adminWelcomeLabel.setBounds(90, 80, 400, 80);
 		this.add(adminWelcomeLabel);
+		
 
 		this.setVisible(true);
 	}
