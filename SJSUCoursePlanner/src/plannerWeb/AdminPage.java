@@ -48,7 +48,6 @@ public class AdminPage extends JFrame implements ActionListener {
 		adminLogoutBtn.addActionListener(this);
 		adminLogoutBtn.setBounds(100, 350, 90, 25);
 		adminLogoutBtn.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				dispose();
