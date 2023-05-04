@@ -9,4 +9,5 @@ public class Advisor extends User {
 		super(firstName, lastName, id, password);
 	}
 
+	
 }

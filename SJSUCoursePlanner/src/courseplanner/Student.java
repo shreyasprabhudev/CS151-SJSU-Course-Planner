@@ -7,6 +7,7 @@ public class Student extends User {
 	private String graduationSemester;
 	private ArrayList<Course> courseList;
 	public int graduationYear;
+	private Advisor advisor;
 	
 	public Student() {
 		super();
@@ -17,6 +18,8 @@ public class Student extends User {
 		courseList = new ArrayList<Course>();
 
 	}
+	
+	
 
 	public void addCourse(Course course) {
 		courseList.add(course);
@@ -26,15 +29,19 @@ public class Student extends User {
 		courseList.remove(course);
 	}
 
-	public void viewAssignedAdvisor(Advisor advisor) // need to fix
-	{
-		System.out.println("Assigned advisor: " + advisor.getFirstName() + " " + advisor.getLastName());
-	}
+	
 	
 	public ArrayList<Course> getCourseList(){
 		return courseList;
 	}
 
+	 public Advisor getAdvisor() {
+	        return advisor;
+	    }
+
+	 public String getAdvisorName() {
+	        return advisor.getFirstName();
+	  }
 
 
 }
