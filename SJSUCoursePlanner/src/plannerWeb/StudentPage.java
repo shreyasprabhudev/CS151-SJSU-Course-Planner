@@ -30,8 +30,12 @@ public class StudentPage extends JFrame implements ActionListener {
 	JLabel studentWelcomeLabel;
 	JButton majorConfirmBtn;
 	JButton stuOptConfirmBtn;
+<<<<<<< HEAD
 	JButton stuLogoutBtn;
 	UserInterface frame;
+=======
+	JButton logoutButton;
+>>>>>>> a9f4ebab79e5abfaf833844ad77174cf7586829f
 
 	JMenuItem compSci;
 	JMenuItem elecEng;
@@ -95,12 +99,29 @@ public class StudentPage extends JFrame implements ActionListener {
 		stuOptConfirmBtn.addActionListener(this);
 		stuOptConfirmBtn.setBounds(100, 450, 90, 25);
 		this.add(stuOptConfirmBtn);
+<<<<<<< HEAD
 		
 		stuLogoutBtn = new JButton("Logout");
 		stuLogoutBtn.addActionListener(this);
 		stuLogoutBtn.setBounds(210, 450, 90, 25);
 		this.add(stuLogoutBtn);
 		
+=======
+
+		//new added section for log out 
+		logoutButton = new JButton("Logout");
+		logoutButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				dispose();
+				Planner.selectUserTypeScreen();
+			}
+		});
+		logoutButton.setBounds(1200, 20, 150, 30);
+		add(logoutButton);
+
+>>>>>>> a9f4ebab79e5abfaf833844ad77174cf7586829f
 		this.setVisible(true);
 
 	}
@@ -111,57 +132,46 @@ public class StudentPage extends JFrame implements ActionListener {
 			if ((String) majorBox.getSelectedItem() == "Computer Science") {
 				displayClasses("cs");
 
-			}
-			else if ((String) majorBox.getSelectedItem() == "Software Engineering") {
+			} else if ((String) majorBox.getSelectedItem() == "Software Engineering") {
 				displayClasses("swe");
 
-			}
-			else if ((String) majorBox.getSelectedItem() == "Electrical Engineering") {
+			} else if ((String) majorBox.getSelectedItem() == "Electrical Engineering") {
 				displayClasses("ee");
 
-			}
-			else if ((String) majorBox.getSelectedItem() == "Aerospace Engineering") {
+			} else if ((String) majorBox.getSelectedItem() == "Aerospace Engineering") {
 				displayClasses("aeroe");
 
-			}
-			else if ((String) majorBox.getSelectedItem() == "Biomedical Engineering") {
+			} else if ((String) majorBox.getSelectedItem() == "Biomedical Engineering") {
 				displayClasses("bme");
 
-			}
-			else if ((String) majorBox.getSelectedItem() == "Mechanical Engineering") {
+			} else if ((String) majorBox.getSelectedItem() == "Mechanical Engineering") {
 				displayClasses("meche");
 
-			}
-			else if ((String) majorBox.getSelectedItem() == "Industrial Engineering") {
+			} else if ((String) majorBox.getSelectedItem() == "Industrial Engineering") {
 				displayClasses("industriale");
-				
-			}
-			else if ((String) majorBox.getSelectedItem() == "Civil Engineering") {
+
+			} else if ((String) majorBox.getSelectedItem() == "Civil Engineering") {
 				displayClasses("civile");
 
-			}
-			else if ((String) majorBox.getSelectedItem() == "Interdisciplinary Engineering") {
+			} else if ((String) majorBox.getSelectedItem() == "Interdisciplinary Engineering") {
 				displayClasses("interdisciplinarye");
 
-			}
-			else if ((String) majorBox.getSelectedItem() == "Mathematics") {
+			} else if ((String) majorBox.getSelectedItem() == "Mathematics") {
 				displayClasses("math");
 
-			}
-			else if ((String) majorBox.getSelectedItem() == "Physics") {
+			} else if ((String) majorBox.getSelectedItem() == "Physics") {
 				displayClasses("physics");
 
-			}
-			else if ((String) majorBox.getSelectedItem() == "Biology") {
+			} else if ((String) majorBox.getSelectedItem() == "Biology") {
 				displayClasses("bio");
 
-			}
-			else if ((String) majorBox.getSelectedItem() == "Chemistry") {
+			} else if ((String) majorBox.getSelectedItem() == "Chemistry") {
 				displayClasses("chem");
 
 			}
 		}
 		if (e.getSource() == stuOptConfirmBtn) {
+<<<<<<< HEAD
 			if((String) stuOptBox.getSelectedItem() == "Add course") {
 				frame.studentAddCourse = new StudentAddCourse(frame);
 				frame.pageTransition(frame.studentAddCourse);
@@ -172,6 +182,14 @@ public class StudentPage extends JFrame implements ActionListener {
 			}
 			else if((String) stuOptBox.getSelectedItem() == "View Assigned Advisor"){
 			
+=======
+			if ((String) stuOptBox.getSelectedItem() == "Add course") {
+
+			} else if ((String) stuOptBox.getSelectedItem() == "Remove course") {
+
+			} else if ((String) stuOptBox.getSelectedItem() == "View Assigned Advisor") {
+
+>>>>>>> a9f4ebab79e5abfaf833844ad77174cf7586829f
 			}
 
 		}
