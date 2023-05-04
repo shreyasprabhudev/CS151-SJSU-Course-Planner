@@ -20,29 +20,101 @@ public class Planner {
 	private static ArrayList<String> users = new ArrayList<>();
 	private static JFrame frame = new JFrame();
 	private static JPanel panel = new JPanel();
+	private static String role;
 
 	public static void main(String[] args) {
 		readFile();
-		selectUserTypeScreen();
+		homepage();
 	}
 
-	public static void selectUserTypeScreen() {
-		JLabel pageTitle;
-		JButton studentButton;
-		JButton adminButton;
-		JButton advisorButton;
+	public static void homepage() {
+		JLabel homePageTitle;
+		JButton signUpButton;
+		JButton logInButton;
 
-		frame.setTitle("SJSU Course Planner");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(1400, 800);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
+		frame.getContentPane().setBackground(Color.GRAY);
+		frame.setTitle("SJSU Course Planner");
 		frame.add(panel);
 
 		panel.setLayout(null);
 		panel.setBackground(Color.GRAY);
 
+		homePageTitle = new JLabel();
+		homePageTitle.setText("<html><center>Welcome to SJSU Course Planner Information Center!</center></html>");
+		homePageTitle.setBounds(0, 100, frame.getWidth(), 80);
+		homePageTitle.setFont(new Font("Palatino", Font.BOLD, 50));
+		homePageTitle.setVerticalAlignment(JLabel.CENTER);
+		homePageTitle.setHorizontalAlignment(JLabel.CENTER);
+
+		signUpButton = new JButton("Sign Up");
+		int buttonWidth = 200;
+		int buttonHeight = 50;
+		int buttonX = (frame.getWidth() - buttonWidth) / 2 + 120; // adjusted buttonX value
+		int buttonY = frame.getHeight() * 3 / 4 - buttonHeight / 2;
+		signUpButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
+
+		ImageIcon imageIcon = new ImageIcon("./homeicon/sjsu1.jpeg");
+		Image image = imageIcon.getImage();
+
+		// Create a new ImageIcon from the original image
+		ImageIcon originalImageIcon = new ImageIcon(image);
+
+		// Set the icon of the label to the original image
+		JLabel imageLabel = new JLabel();
+		imageLabel.setIcon(originalImageIcon);
+
+		// Calculate the space between the home page title and the sign-up boundary
+		int space = signUpButton.getY() - (homePageTitle.getY() + homePageTitle.getHeight());
+
+		// Set the bounds of the label to center it in the remaining space
+		int x = (frame.getWidth() - originalImageIcon.getIconWidth()) / 2;
+		int y = homePageTitle.getY() + homePageTitle.getHeight() + space / 2 - originalImageIcon.getIconHeight() / 2;
+		imageLabel.setBounds(x, y, originalImageIcon.getIconWidth(), originalImageIcon.getIconHeight());
+
+		logInButton = new JButton("Log In");
+		buttonX = buttonX - buttonWidth - 50;
+		logInButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
+
+		signUpButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel.removeAll();
+				panel.updateUI();
+				selectUserTypeScreen(false);
+			}
+		});
+
+		// login button operations
+		logInButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel.removeAll();
+				panel.updateUI();
+				selectUserTypeScreen(true);
+			}
+		});
+
+		panel.add(homePageTitle);
+		panel.setLayout(null);
+		panel.add(imageLabel);
+		panel.add(signUpButton);
+		panel.add(logInButton);
+		frame.setVisible(true);
+	}
+
+
+	public static void selectUserTypeScreen(boolean isLoggingIn) {
+		JLabel pageTitle;
+		JButton studentButton;
+		JButton adminButton;
+		JButton advisorButton;
+
 		pageTitle = new JLabel();
-		pageTitle.setText("Welcome to SJSU Course Planner Information Center!");
+		if(isLoggingIn)
+			pageTitle.setText("Welcome Back!");
+		else
+			pageTitle.setText("Welcome to the SJSU Planner!");
 		pageTitle.setBounds(0, 100, frame.getWidth(), 80);
 		pageTitle.setFont(new Font("Palatino", Font.BOLD, 50));
 		pageTitle.setVerticalAlignment(JLabel.CENTER);
@@ -59,7 +131,11 @@ public class Planner {
 			public void actionPerformed(ActionEvent e) {
 				panel.removeAll();
 				panel.updateUI();
-				welcomeScreen("Student");
+				role = "Student";
+				if(isLoggingIn)
+					welcomeScreen();
+				else
+					registerScreen();
 			}
 		});
 
@@ -74,7 +150,11 @@ public class Planner {
 			public void actionPerformed(ActionEvent e) {
 				panel.removeAll();
 				panel.updateUI();
-				welcomeScreen("Admin");
+				role = "Admin";
+				if(isLoggingIn)
+					welcomeScreen();
+				else
+					registerScreen();
 			}
 		});
 
@@ -89,10 +169,15 @@ public class Planner {
 			public void actionPerformed(ActionEvent e) {
 				panel.removeAll();
 				panel.updateUI();
-				welcomeScreen("Advisor");
-
+				role = "Advisor";
+				if(isLoggingIn)
+					welcomeScreen();
+				else
+					registerScreen();
 			}
 		});
+
+		createBackButton("homepage", true);
 
 		panel.add(pageTitle);
 		panel.add(studentButton);
@@ -101,7 +186,7 @@ public class Planner {
 		frame.setVisible(true);
 	}
 
-	public static void welcomeScreen(String role) {
+	public static void welcomeScreen() {
 		JButton loginButton;
 		JButton signUpButton;
 		JLabel pageTitle;
@@ -130,7 +215,7 @@ public class Planner {
 			public void actionPerformed(ActionEvent e) {
 				panel.removeAll();
 				panel.updateUI();
-				registerScreen(role);
+				registerScreen();
 			}
 		});
 
@@ -185,18 +270,18 @@ public class Planner {
 							JOptionPane.ERROR_MESSAGE);
 					panel.removeAll();
 					panel.updateUI();
-					welcomeScreen(role);
+					welcomeScreen();
 				} else if (output.equals("Wrong password")) {
 					JOptionPane.showMessageDialog(frame, new PasswordException("Username and password do not match!"),
 							"Password Error!", JOptionPane.ERROR_MESSAGE);
 					panel.removeAll();
 					panel.updateUI();
-					welcomeScreen(role);
+					welcomeScreen();
 				}
 			}
 		});
 
-		createBackButton();
+		createBackButton("selectRole", true);
 
 		panel.add(loginButton);
 		panel.add(userText);
@@ -209,7 +294,7 @@ public class Planner {
 		frame.setVisible(true);
 	}
 
-	public static void createBackButton() {
+	public static void createBackButton(String screen, boolean isLoggingIn) {
 		JButton backButton = new JButton("<");
 		backButton.setBounds(25, 25, 75, 50);
 		backButton.setFont(new Font("Arial", Font.PLAIN, 25));
@@ -217,13 +302,19 @@ public class Planner {
 			public void actionPerformed(ActionEvent e) {
 				panel.removeAll();
 				panel.updateUI();
-				selectUserTypeScreen();
+				if(screen.equals("selectRole"))
+					if(isLoggingIn)
+						selectUserTypeScreen(true);
+					else
+						selectUserTypeScreen(false);
+				else if(screen.equals("homepage"))
+					homepage();
 			}
 		});
 		panel.add(backButton);
 	}
 
-	public static void registerScreen(String role) {
+	public static void registerScreen() {
 		JLabel firstNameLabel;
 		JTextField firstNameText;
 		JLabel lastNameLabel;
@@ -310,6 +401,8 @@ public class Planner {
 		});
 
 		panel.add(button);
+
+		createBackButton("selectRole", false);
 
 		frame.setVisible(true);
 	}
