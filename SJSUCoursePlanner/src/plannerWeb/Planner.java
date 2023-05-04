@@ -23,7 +23,6 @@ public class Planner{
 	private static String role;
 
 	public static void main(String[] args) {
-		readFile();
 		homepage();
 	}
 
@@ -34,6 +33,8 @@ public class Planner{
 
 		frame = new JFrame();
 		panel = new JPanel();
+
+		readFile();
 
 		frame.setSize(1400, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
