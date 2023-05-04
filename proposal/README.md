@@ -99,6 +99,9 @@ Student Page with Classes showing for Major chosen
 Admin Page with Add User showing
 ![Screenshot (240)](https://user-images.githubusercontent.com/114033045/236168709-dfd3e849-ddbb-4e00-8c00-2e6f519c2128.png)
 
+Advisor page viewing Student Planner
+![image](https://user-images.githubusercontent.com/114033045/236174779-dbf8f9ff-62ba-48c5-9979-9955d66ffbbd.png)
+
 
 # Other References:
 [1] https://1000projects.org/course-planning-project-java.html
