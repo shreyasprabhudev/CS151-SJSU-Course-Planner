@@ -134,6 +134,8 @@ public class AdminPage extends JFrame implements ActionListener {
 			String firstName = firstNameField.getText();
 			String lastName = lastNameField.getText();
 
+			Planner.writeFile(username, password, firstName, lastName, "admin_generated");
+
 		}
 	}
 

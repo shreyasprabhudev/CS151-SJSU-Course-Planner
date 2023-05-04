@@ -5,11 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -317,29 +321,13 @@ public class StudentPage extends JFrame implements ActionListener {
         removeCourseFrame.setLayout(null);
         removeCourseFrame.setLocationRelativeTo(null);
 
-        JLabel courseNumberLabel = new JLabel("Course Num:");
-        courseNumberLabel.setBounds(50, 50, 100, 25);
+        JLabel courseNumberLabel = new JLabel("Enter the Course Number:");
+        courseNumberLabel.setBounds(110, 100, 300, 25);
         removeCourseFrame.add(courseNumberLabel);
 
         JTextField courseNumberField = new JTextField();
-        courseNumberField.setBounds(150, 50, 200, 25);
+        courseNumberField.setBounds(110, 150, 200, 25);
         removeCourseFrame.add(courseNumberField);
-
-        JLabel courseUnitsLabel = new JLabel("Course Units:");
-        courseUnitsLabel.setBounds(50, 80, 100, 25);
-        removeCourseFrame.add(courseUnitsLabel);
-
-        JTextField courseUnitsField = new JTextField();
-        courseUnitsField.setBounds(150, 80, 200, 25);
-        removeCourseFrame.add(courseUnitsField);
-
-        JLabel courseNameLabel = new JLabel("Course Name:");
-        courseNameLabel.setBounds(50, 110, 100, 25);
-        removeCourseFrame.add(courseNameLabel);
-
-        JTextField courseNameField = new JTextField();
-        courseNameField.setBounds(150, 110, 200, 25);
-        removeCourseFrame.add(courseNameField);
 
         JButton addButton = new JButton("Remove");
         addButton.setBounds(150, 200, 100, 25);
@@ -347,8 +335,7 @@ public class StudentPage extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String courseNumber = courseNumberField.getText();
-                String courseUnits = courseUnitsField.getText();
-                String courseName = courseNameField.getText();
+                removeText(username, courseNumber);
 
                 removeCourseFrame.dispose();
             }
@@ -357,6 +344,57 @@ public class StudentPage extends JFrame implements ActionListener {
 
         removeCourseFrame.setVisible(true);
     }
+
+	public static void removeText(String username, String courseNumber){
+		try{
+			// PrintWriter object for output.txt
+			PrintWriter pw = new PrintWriter("output.txt");
+			File file = new File(username + ".txt");
+			String tempFileName = username + ".txt";
+						  
+			// BufferedReader object for input.txt
+			BufferedReader br1 = new BufferedReader(new FileReader(tempFileName));
+			  
+			String line1 = br1.readLine();
+			String deleted_line = "";
+
+			try {
+				Scanner myReader = new Scanner(file);
+				while (myReader.hasNextLine()) {
+					String data = myReader.nextLine();
+					String[] partsOfLine = data.split(",");
+					if(partsOfLine[0].equals(courseNumber))
+						deleted_line = data;
+				}
+				myReader.close();
+			} catch (FileNotFoundException e) {
+				System.out.println("An error occurred.");
+				e.printStackTrace();
+			}
+
+			while(line1 != null){
+				if(!line1.equals(deleted_line))
+					pw.println(line1);
+				
+				line1 = br1.readLine(); 
+			}
+			
+			pw.flush();
+			  
+			// closing resources
+			br1.close();
+			pw.close();
+
+			file.delete();
+			File newFile = new File("output.txt");
+			newFile.renameTo(file);
+			System.out.println("File operation performed successfully");
+		}
+		catch(IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
 	
 	private void assignAdvisors() {
 	    // Read in list of users from file
