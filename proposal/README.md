@@ -6,8 +6,8 @@ SJSU Course Planner
 
 **Proposal Contribution:** 
 <br />Natalie Kao - Edited and updated final proposal. Completed Steps to run your code, solution, operations, state diagram, use case diagram.
-<br />Jisoo Kim -  Completed steps to run the code, class diagram, and readme file for the first proposal where we explain what our diagrams represent. Helped edit the 	final proposal as well. Help come up with the operations and functionality of our project idea. 
-<br />Shreyas Prabhudev - Created initial proposal for mid point check in
+<br />Jisoo Kim -  Completed steps to run the code, class diagram, and readme file for the first proposal where we explain what our diagrams represent. Helped edit the final proposal as well. Help come up with the operations and functionality of our project idea. 
+<br />Shreyas Prabhudev - Created initial proposal for mid point check in and added in the sequence diagram as well as editing the other sections
 
 **Presentation Contribution:** 
 <br /> Natalie Kao - Create slides and talk about student operations
