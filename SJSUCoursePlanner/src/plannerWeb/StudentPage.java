@@ -71,7 +71,7 @@ public class StudentPage extends JFrame implements ActionListener {
 				"Civil Engineering", "Interdisciplinary Engineering", "Mathematics", "Physics", "Biology",
 				"Chemistry" };
 
-		String[] studentOpt = { "Add Course", "Remove Course", "View Assigned Advisor" };
+		String[] studentOpt = { "Add Course", "Remove Course", "View Assigned Advisor", "View Courses" };
 		majorBox = new JComboBox<>(majors);
 		majorBox.setBounds(100, 220, 200, 25);
 		this.add(majorBox);
@@ -170,6 +170,9 @@ public class StudentPage extends JFrame implements ActionListener {
 				addCourse(this.username);
 			} else if ((String) stuOptBox.getSelectedItem() == "Remove Course") {
 				removeCourse(this.username);
+			} 
+			else if ((String) stuOptBox.getSelectedItem() == "View Courses") {
+				viewCourses(username);
 			} else if ((String) stuOptBox.getSelectedItem() == "View Assigned Advisor") {
 				assignAdvisors();
 			}
@@ -189,6 +192,32 @@ public class StudentPage extends JFrame implements ActionListener {
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
 				classes.add(line);
+			}
+
+			// Close the file reader
+			bufferedReader.close();
+
+			// Display the list of classes in a Swing component
+			JList<String> classList = new JList<>(classes.toArray(new String[0]));
+			JScrollPane scrollPane = new JScrollPane(classList);
+			JOptionPane.showMessageDialog(null, scrollPane, "Classes for " + major, JOptionPane.PLAIN_MESSAGE);
+		} catch (IOException e) {
+			// Handle the exception (e.g. display an error message)
+		}
+	}
+
+	private void viewCourses(String username) {
+		try {
+			// Open the text file containing the courses
+			FileReader fileReader = new FileReader(username + ".txt");
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+			// Read each line of the file and add it to a list of classes
+			List<String> classes = new ArrayList<>();
+			String line;
+			while ((line = bufferedReader.readLine()) != null) {
+				String[] courseInfo = line.split(",");
+				classes.add("Class Number: " + courseInfo[0] + "; Class Name: " + courseInfo[1] + "; Units: " + courseInfo[2]);
 			}
 
 			// Close the file reader

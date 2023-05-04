@@ -1,8 +1,4 @@
-UP-9395 Abhishek123! Abhishek Gaikwad abhgai@sjsu.edu
 SS-7001 Natalie123! Natalie Kao natkao@gmail.com
-UA-3254 Admin123! Admin Admin admin@sjsu.edu
-UA-4004 Admin12! Admin L adminl@sjsu.edu
+-3254 Admin123! Admin Admin admin@sjsu.edu
+-4004 Admin12! Admin L adminl@sjsu.edu
 UA-1270 Adminc12! Admin c adminc@sjsu.edu
-SS-7481 Natkao12! Nat Kao natkao@gmail.com
-SA-5094 advisorA1! Advisor A advisor.a@gmail.com
-UA-936 adminA1! Admin A admina@gmail.com
