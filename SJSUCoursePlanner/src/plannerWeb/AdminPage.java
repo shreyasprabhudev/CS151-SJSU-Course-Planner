@@ -34,11 +34,15 @@ public class AdminPage extends JFrame implements ActionListener {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		String[] adminOptions = { "Add User", "Remove User", "Add Course", "Remove Course", "Add Required Information",
 				"View Course Planner" };
 =======
 		String[] adminOptions = { "Add User", "Remove User", "Add Course", "Remove Course", "View Courses" };
 >>>>>>> a9f4ebab79e5abfaf833844ad77174cf7586829f
+=======
+		String[] adminOptions = { "Add User", "Remove User", "Add Course", "Remove Course", "View Courses" };
+>>>>>>> jisoo-branch
 
 		adminOptionsBox = new JComboBox<String>(adminOptions);
 		adminOptionsBox.setBounds(100, 220, 200, 25);
@@ -63,10 +67,14 @@ public class AdminPage extends JFrame implements ActionListener {
 		this.add(adminLogoutBtn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		adminWelcomeLabel = new JLabel("Welcome Admin");
 =======
 		adminWelcomeLabel = new JLabel("Welcome Admin!");
 >>>>>>> a9f4ebab79e5abfaf833844ad77174cf7586829f
+=======
+		adminWelcomeLabel = new JLabel("Welcome Admin!");
+>>>>>>> jisoo-branch
 		adminWelcomeLabel.setHorizontalAlignment(JLabel.CENTER);
 		adminWelcomeLabel.setFont(new Font("Serif", Font.BOLD, 50));
 		adminWelcomeLabel.setBounds(90, 80, 400, 80);
@@ -90,12 +98,16 @@ public class AdminPage extends JFrame implements ActionListener {
 			} else if (((String) adminOptionsBox.getSelectedItem()).equals("Remove Course")) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			} else if (((String) adminOptionsBox.getSelectedItem()).equals("Add Required Information")) {
 =======
+=======
+>>>>>>> jisoo-branch
 			} else if (((String) adminOptionsBox.getSelectedItem()).equals("View Courses")) {
 				// create a new frame to display the courses
 				JFrame courseFrame = new JFrame("All Courses");
 				courseFrame.setSize(800, 600);
+<<<<<<< HEAD
 
 				// create a text area to display the courses
 				JTextArea courseTextArea = new JTextArea();
@@ -115,6 +127,26 @@ public class AdminPage extends JFrame implements ActionListener {
 					courseTextArea.setText("Course data not found.");
 				}
 
+=======
+
+				// create a text area to display the courses
+				JTextArea courseTextArea = new JTextArea();
+				courseTextArea.setEditable(false);
+
+				// read the course data from a file and display it in the text area
+				try {
+					File courseFile = new File("EntireCoursesAdmin.txt");
+					Scanner scanner = new Scanner(courseFile);
+					while (scanner.hasNextLine()) {
+						String line = scanner.nextLine();
+						courseTextArea.append(line + "\n");
+					}
+					scanner.close();
+				} catch (FileNotFoundException ex) {
+					courseTextArea.setText("Course data not found.");
+				}
+
+>>>>>>> jisoo-branch
 				// add the text area to a scroll pane
 				JScrollPane scrollPane = new JScrollPane(courseTextArea);
 				scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -125,6 +157,7 @@ public class AdminPage extends JFrame implements ActionListener {
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 		if (e.getSource() == adminLogoutBtn) {
 			this.setVisible(false);
@@ -134,6 +167,8 @@ public class AdminPage extends JFrame implements ActionListener {
 	}
 
 =======
+=======
+>>>>>>> jisoo-branch
 		} else
 
 		{

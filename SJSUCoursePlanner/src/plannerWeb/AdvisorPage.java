@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 public class AdvisorPage extends JFrame implements ActionListener{
 
@@ -18,17 +19,23 @@ public class AdvisorPage extends JFrame implements ActionListener{
 	JButton advisorConfirmBtn;
 	JButton advisorLogoutBtn;
 =======
+=======
+>>>>>>> jisoo-branch
 public class AdvisorPage extends JFrame implements ActionListener {
 
 	JComboBox<String> advisorOptionsBox;
 	JButton advisorOptionConfirmBtn;
 	JButton advisorLogoutBtn;
 	JLabel advisorWelcomeLabel;
+<<<<<<< HEAD
 >>>>>>> a9f4ebab79e5abfaf833844ad77174cf7586829f
+=======
+>>>>>>> jisoo-branch
 
 	public AdvisorPage() {
 		this.setSize(1400, 800);
 		this.setLayout(null);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		this.setTitle("Majors");
 		this.setResizable(false);
@@ -54,6 +61,8 @@ public class AdvisorPage extends JFrame implements ActionListener {
 		this.setVisible(true);
 
 =======
+=======
+>>>>>>> jisoo-branch
 		this.setTitle("Advisor Page");
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,12 +98,16 @@ public class AdvisorPage extends JFrame implements ActionListener {
 		add(advisorLogoutBtn);
 
 		this.setVisible(true);
+<<<<<<< HEAD
 >>>>>>> a9f4ebab79e5abfaf833844ad77174cf7586829f
+=======
+>>>>>>> jisoo-branch
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (e.getSource() == advisorConfirmBtn) {
 			if (((String) profOptBox.getSelectedItem()).equals("Add Syllabus")) {
@@ -113,6 +126,8 @@ public class AdvisorPage extends JFrame implements ActionListener {
 	}
 	
 =======
+=======
+>>>>>>> jisoo-branch
 		if (e.getSource() == advisorOptionConfirmBtn) {
 			if (((String) advisorOptionsBox.getSelectedItem()).equals("Add User")) {
 
@@ -127,7 +142,10 @@ public class AdvisorPage extends JFrame implements ActionListener {
 		}
 	}
 
+<<<<<<< HEAD
 >>>>>>> a9f4ebab79e5abfaf833844ad77174cf7586829f
+=======
+>>>>>>> jisoo-branch
 	public static void main(String[] args) {
 		new AdvisorPage();
 	}

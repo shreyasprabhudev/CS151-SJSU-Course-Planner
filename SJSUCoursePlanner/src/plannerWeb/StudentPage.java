@@ -31,11 +31,15 @@ public class StudentPage extends JFrame implements ActionListener {
 	JButton majorConfirmBtn;
 	JButton stuOptConfirmBtn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	JButton stuLogoutBtn;
 	UserInterface frame;
 =======
 	JButton logoutButton;
 >>>>>>> a9f4ebab79e5abfaf833844ad77174cf7586829f
+=======
+	JButton logoutButton;
+>>>>>>> jisoo-branch
 
 	JMenuItem compSci;
 	JMenuItem elecEng;
@@ -100,6 +104,7 @@ public class StudentPage extends JFrame implements ActionListener {
 		stuOptConfirmBtn.setBounds(100, 450, 90, 25);
 		this.add(stuOptConfirmBtn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 		stuLogoutBtn = new JButton("Logout");
 		stuLogoutBtn.addActionListener(this);
@@ -107,6 +112,8 @@ public class StudentPage extends JFrame implements ActionListener {
 		this.add(stuLogoutBtn);
 		
 =======
+=======
+>>>>>>> jisoo-branch
 
 		//new added section for log out 
 		logoutButton = new JButton("Logout");
@@ -121,7 +128,10 @@ public class StudentPage extends JFrame implements ActionListener {
 		logoutButton.setBounds(1200, 20, 150, 30);
 		add(logoutButton);
 
+<<<<<<< HEAD
 >>>>>>> a9f4ebab79e5abfaf833844ad77174cf7586829f
+=======
+>>>>>>> jisoo-branch
 		this.setVisible(true);
 
 	}
@@ -172,6 +182,7 @@ public class StudentPage extends JFrame implements ActionListener {
 		}
 		if (e.getSource() == stuOptConfirmBtn) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if((String) stuOptBox.getSelectedItem() == "Add course") {
 				frame.studentAddCourse = new StudentAddCourse(frame);
 				frame.pageTransition(frame.studentAddCourse);
@@ -183,13 +194,18 @@ public class StudentPage extends JFrame implements ActionListener {
 			else if((String) stuOptBox.getSelectedItem() == "View Assigned Advisor"){
 			
 =======
+=======
+>>>>>>> jisoo-branch
 			if ((String) stuOptBox.getSelectedItem() == "Add course") {
 
 			} else if ((String) stuOptBox.getSelectedItem() == "Remove course") {
 
 			} else if ((String) stuOptBox.getSelectedItem() == "View Assigned Advisor") {
 
+<<<<<<< HEAD
 >>>>>>> a9f4ebab79e5abfaf833844ad77174cf7586829f
+=======
+>>>>>>> jisoo-branch
 			}
 
 		}
