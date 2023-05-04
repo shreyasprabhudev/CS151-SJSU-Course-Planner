@@ -12,16 +12,17 @@ SJSU Course Planner
 **Presentation Contribution:** 
 <br /> Natalie Kao - Create slides and talk about student operations
 <br /> Jisoo Kim - Create slides and in charge of admin operations. Also in charge of the home page design with an image that has a path way to sign up and log in. 
-<br /> Shreyas Prabhudev
+<br /> Shreyas Prabhudev - Create slides and will discuss how the different pages interact and the operations for student and advisor
 
 **Project Code Contribution:** 
 <br />Natalie Kao - Implement majority of back end and MVC pattern, create StudentPage and implement methods for each selection 
 <br />Jisoo Kim - Implemented majority of the front end (home page and admin page), implemented methods that each role can perform, helped with creating a login and sign up system that stores the user data into a txt file. Also worked on password exceptions to make sure that we have requirements to set up a strong password. 
-<br />Shreyas Prabhudev - Implemented cross page functionality to sync the different login/signup views with the buttons and connect it to a text backend; validated user logins and created methods to read/write from files for users; created and wrote to individual files for the courses that each student takes
+<br />Shreyas Prabhudev - Implemented cross page functionality to sync the different login/signup views with the buttons and connect it to a text backend; validated user logins and created methods to read/write from files for users; created and wrote to individual files for the courses that each student takes and which ones they removed
 
 **Report Contribution:** 
-<br /> Natalie Kao - Created and made entire report.
-<br /> Jisoo Kim - Edited and fixed operations
+<br /> Natalie Kao - Created and made entire report; made use case and state diagrams
+<br /> Jisoo Kim - Edited and fixed operations; made class diagram
+<br /> Shreyas Prabhudev - Edited by adding assumptions and high-level description; made sequence diagram
 
 # Problem/Issue to Resolve
 SJSU students need a better way to plan and organize their courses to complete their degree requirements efficiently, where all the information can be found at one place.  
