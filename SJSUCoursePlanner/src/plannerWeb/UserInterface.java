@@ -47,7 +47,6 @@ public class UserInterface {
 
 	public static final JFrame frame = new JFrame();
 	public static final Container contentPane = frame.getContentPane();
-	LoginPage loginPage;
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -89,8 +88,8 @@ public class UserInterface {
 		frame.pack();
 
 		// Setup "Home" menu for Users
-		adminPage = new AdminPage(this);
-		studentPage = new StudentPage(this);
+		adminPage = new AdminPage();
+		studentPage = new StudentPage();
 
 		// Setup Admin specific GUI
 		adminAddUser = new AdminAddUser(this);

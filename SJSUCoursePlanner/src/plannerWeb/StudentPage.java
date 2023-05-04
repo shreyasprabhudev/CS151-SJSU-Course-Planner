@@ -4,10 +4,14 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,26 +24,24 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
+import courseplanner.Student;
+import courseplanner.User;
 import plannerWeb.*;
 
 public class StudentPage extends JFrame implements ActionListener {
+	List<Student> studentList = new ArrayList<>();
 	JComboBox<String> majorBox;
 	JComboBox<String> stuOptBox;
 	JLabel major;
 	JLabel studentWelcomeLabel;
 	JButton majorConfirmBtn;
 	JButton stuOptConfirmBtn;
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 	JButton stuLogoutBtn;
-	UserInterface frame;
-=======
+
 	JButton logoutButton;
->>>>>>> a9f4ebab79e5abfaf833844ad77174cf7586829f
-=======
-	JButton logoutButton;
->>>>>>> jisoo-branch
 
 	JMenuItem compSci;
 	JMenuItem elecEng;
@@ -59,10 +61,10 @@ public class StudentPage extends JFrame implements ActionListener {
 	JMenuItem soc;
 	JMenuItem pubHealth;
 	JMenuItem chem;
+	String username;
 
-	public StudentPage(UserInterface in) {
+	public StudentPage() {
 
-		frame = in;
 		this.setSize(1400, 800);
 		this.setLayout(null);
 		this.setTitle("Majors");
@@ -103,35 +105,25 @@ public class StudentPage extends JFrame implements ActionListener {
 		stuOptConfirmBtn.addActionListener(this);
 		stuOptConfirmBtn.setBounds(100, 450, 90, 25);
 		this.add(stuOptConfirmBtn);
-<<<<<<< HEAD
-<<<<<<< HEAD
-		
+
 		stuLogoutBtn = new JButton("Logout");
 		stuLogoutBtn.addActionListener(this);
 		stuLogoutBtn.setBounds(210, 450, 90, 25);
 		this.add(stuLogoutBtn);
-		
-=======
-=======
->>>>>>> jisoo-branch
 
-		//new added section for log out 
+		// new added section for log out
 		logoutButton = new JButton("Logout");
 		logoutButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				dispose();
-				Planner.selectUserTypeScreen();
+				Planner.homepage();
 			}
 		});
 		logoutButton.setBounds(1200, 20, 150, 30);
 		add(logoutButton);
 
-<<<<<<< HEAD
->>>>>>> a9f4ebab79e5abfaf833844ad77174cf7586829f
-=======
->>>>>>> jisoo-branch
 		this.setVisible(true);
 
 	}
@@ -181,31 +173,13 @@ public class StudentPage extends JFrame implements ActionListener {
 			}
 		}
 		if (e.getSource() == stuOptConfirmBtn) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-			if((String) stuOptBox.getSelectedItem() == "Add course") {
-				frame.studentAddCourse = new StudentAddCourse(frame);
-				frame.pageTransition(frame.studentAddCourse);
-			}
-			else if((String) stuOptBox.getSelectedItem() == "Remove course"){
-				frame.studentRemoveCourse = new StudentRemoveCourse(frame);
-				frame.pageTransition(frame.studentRemoveCourse);
-			}
-			else if((String) stuOptBox.getSelectedItem() == "View Assigned Advisor"){
-			
-=======
-=======
->>>>>>> jisoo-branch
-			if ((String) stuOptBox.getSelectedItem() == "Add course") {
 
-			} else if ((String) stuOptBox.getSelectedItem() == "Remove course") {
-
+			if ((String) stuOptBox.getSelectedItem() == "Add Course") {
+				addCourse();
+			} else if ((String) stuOptBox.getSelectedItem() == "Remove Course") {
+				removeCourse();
 			} else if ((String) stuOptBox.getSelectedItem() == "View Assigned Advisor") {
-
-<<<<<<< HEAD
->>>>>>> a9f4ebab79e5abfaf833844ad77174cf7586829f
-=======
->>>>>>> jisoo-branch
+				assignAdvisors();
 			}
 
 		}
@@ -234,8 +208,133 @@ public class StudentPage extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, scrollPane, "Classes for " + major, JOptionPane.PLAIN_MESSAGE);
 		} catch (IOException e) {
 			// Handle the exception (e.g. display an error message)
+			e.getMessage();
 		}
 	}
 
+	private void addCourse() {
+		JFrame addFrame = new JFrame("Add Course");
+		addFrame.setSize(400, 300);
+		addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		addFrame.setLayout(null);
+		addFrame.setLocationRelativeTo(null);
 
+		JLabel courseNumberLabel = new JLabel("Course Num:");
+		courseNumberLabel.setBounds(50, 50, 100, 25);
+		addFrame.add(courseNumberLabel);
+
+		JTextField courseNumberField = new JTextField();
+		courseNumberField.setBounds(150, 50, 200, 25);
+		addFrame.add(courseNumberField);
+
+		JLabel courseUnitsLabel = new JLabel("Course Units:");
+		courseUnitsLabel.setBounds(50, 80, 100, 25);
+		addFrame.add(courseUnitsLabel);
+
+		JTextField courseUnitsField = new JTextField();
+		courseUnitsField.setBounds(150, 80, 200, 25);
+		addFrame.add(courseUnitsField);
+
+		JLabel courseNameLabel = new JLabel("Course Name:");
+		courseNameLabel.setBounds(50, 110, 100, 25);
+		addFrame.add(courseNameLabel);
+
+		JTextField courseNameField = new JTextField();
+		courseNameField.setBounds(150, 110, 200, 25);
+		addFrame.add(courseNameField);
+
+		JLabel professorLabel = new JLabel("Professor:");
+		professorLabel.setBounds(50, 140, 100, 25);
+		addFrame.add(professorLabel);
+
+		JTextField professorField = new JTextField();
+		professorField.setBounds(150, 140, 200, 25);
+		addFrame.add(professorField);
+
+		JButton addButton = new JButton("Add Course");
+		addButton.setBounds(150, 200, 100, 25);
+		addButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String courseNumber = courseNumberField.getText();
+				String courseUnits = courseUnitsField.getText();
+				String courseName = courseNameField.getText();
+				String professor = professorField.getText();
+
+				addFrame.dispose();
+			}
+		});
+		addFrame.add(addButton);
+
+		addFrame.setVisible(true);
+	}
+
+	private void removeCourse() {
+        JFrame removeCourseFrame = new JFrame("Remove Course");
+        removeCourseFrame.setSize(400, 300);
+        removeCourseFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        removeCourseFrame.setLayout(null);
+        removeCourseFrame.setLocationRelativeTo(null);
+
+        JLabel courseNumberLabel = new JLabel("Course Num:");
+        courseNumberLabel.setBounds(50, 50, 100, 25);
+        removeCourseFrame.add(courseNumberLabel);
+
+        JTextField courseNumberField = new JTextField();
+        courseNumberField.setBounds(150, 50, 200, 25);
+        removeCourseFrame.add(courseNumberField);
+
+        JLabel courseUnitsLabel = new JLabel("Course Units:");
+        courseUnitsLabel.setBounds(50, 80, 100, 25);
+        removeCourseFrame.add(courseUnitsLabel);
+
+        JTextField courseUnitsField = new JTextField();
+        courseUnitsField.setBounds(150, 80, 200, 25);
+        removeCourseFrame.add(courseUnitsField);
+
+        JLabel courseNameLabel = new JLabel("Course Name:");
+        courseNameLabel.setBounds(50, 110, 100, 25);
+        removeCourseFrame.add(courseNameLabel);
+
+        JTextField courseNameField = new JTextField();
+        courseNameField.setBounds(150, 110, 200, 25);
+        removeCourseFrame.add(courseNameField);
+
+        JButton addButton = new JButton("Remove");
+        addButton.setBounds(150, 200, 100, 25);
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String courseNumber = courseNumberField.getText();
+                String courseUnits = courseUnitsField.getText();
+                String courseName = courseNameField.getText();
+                removeCourseFrame.dispose();
+            }
+        });
+        removeCourseFrame.add(addButton);
+
+        removeCourseFrame.setVisible(true);
+    }
+	
+	private void assignAdvisors() {
+	    // Read in list of users from file
+		  String lastName = JOptionPane.showInputDialog("Enter the first letter of the student's last name:");
+	        if (lastName != null && lastName.length() > 0) {
+	            char firstLetter = Character.toUpperCase(lastName.charAt(0));
+	            String advisorA = "Advisor A";
+	            String advisorB = "Advisor B"
+;	            if (advisorA != null && firstLetter >= 'A' && firstLetter <= 'M') {
+	                JOptionPane.showMessageDialog(null, advisorA, "Student Advisor", JOptionPane.INFORMATION_MESSAGE);
+	            }else if(advisorB != null && firstLetter >= 'A' && firstLetter <= 'M') {
+	                JOptionPane.showMessageDialog(null, advisorB, "Student Advisor", JOptionPane.INFORMATION_MESSAGE);
+
+	            }
+	        }
+	    }
+public static void main(String[] args) {
+	new StudentPage();
 }
+	
+}
+
+
