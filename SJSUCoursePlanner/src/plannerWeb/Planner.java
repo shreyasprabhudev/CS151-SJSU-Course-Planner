@@ -16,10 +16,10 @@ import java.util.Scanner;
 import java.awt.Font;
 import java.awt.Image;
 
-public class Planner {
+public class Planner{
 	private static ArrayList<String> users = new ArrayList<>();
-	private static JFrame frame = new JFrame();
-	private static JPanel panel = new JPanel();
+	private static JFrame frame;
+	private static JPanel panel;
 	private static String role;
 
 	public static void main(String[] args) {
@@ -31,6 +31,9 @@ public class Planner {
 		JLabel homePageTitle;
 		JButton signUpButton;
 		JButton logInButton;
+
+		frame = new JFrame();
+		panel = new JPanel();
 
 		frame.setSize(1400, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -260,10 +263,6 @@ public class Planner {
 						new StudentPage();
 					else if (username.substring(0, 2).equals("UA"))
 						new AdminPage();
-////					else if(username.substring(0,2).equals("SA")) {
-////						new AdvisorPage();
-//					}
-					// successfulLoginScreen(username, fields[2], fields[3], fields[4]);
 				} else if (output.equals("User does not exist")) {
 					JOptionPane.showMessageDialog(frame,
 							new Exception("This is not a valid username! Please sign up first!"), "Error Loggin In!",
@@ -393,7 +392,15 @@ public class Planner {
 					panel.updateUI();
 
 					writeFile(username, password, firstNameText.getText(), lastNameText.getText(), emailText.getText());
-					successScreen(username);
+					
+					if (username.substring(0, 2).equals("SS")){
+						createStudentFile(username);
+						new StudentPage();
+					}
+					else if (username.substring(0, 2).equals("UA"))
+						new AdminPage();
+					
+					frame = null;
 				} catch (PasswordException p) {
 					JOptionPane.showMessageDialog(frame, p, "Password Error!", JOptionPane.ERROR_MESSAGE);
 				}
@@ -461,7 +468,6 @@ public class Planner {
 
 					String[] fields = getUser(username, password).split(" ");
 
-					successfulLoginScreen(username, fields[2], fields[3], fields[4]);
 				} else if (output.equals("User does not exist")) {
 					JOptionPane.showMessageDialog(frame,
 							new Exception("This is not a valid username! Please sign up first!"), "Error Loggin In!",
@@ -513,6 +519,20 @@ public class Planner {
 			writer.write(System.getProperty("line.separator"));
 			writer.close();
 			System.out.println("Successfully wrote to the file.");
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
+
+	public static void createStudentFile(String username) {
+		try {
+			File file = new File(username + ".txt");
+			if (file.createNewFile()) {
+				System.out.println("File created: " + file.getName());
+			} else {
+				System.out.println("File already exists.");
+			}
 		} catch (IOException e) {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
@@ -625,55 +645,4 @@ public class Planner {
 
 	}
 
-	public static void successfulLoginScreen(String username, String firstName, String lastName, String email) {
-		JLabel pageTitle;
-		JLabel usernameLabel;
-		JLabel firstNameLabel;
-		JLabel lastNameLabel;
-		JLabel emailLabel;
-		JPanel panel = new JPanel();
-		JFrame frame = new JFrame();
-
-		frame.setTitle("Success!");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(1400, 800);
-		frame.setResizable(false);
-		frame.getContentPane().setBackground(Color.WHITE);
-		frame.add(panel);
-
-		panel.setLayout(null);
-
-		pageTitle = new JLabel("Success! Welcome back " + username + "!");
-		pageTitle.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2 - 225, 800, 40);
-		pageTitle.setFont(new Font("Arial", Font.PLAIN, 35));
-		pageTitle.setHorizontalAlignment(JLabel.CENTER);
-		panel.add(pageTitle);
-
-		usernameLabel = new JLabel("Username: " + username);
-		usernameLabel.setBounds(frame.getWidth() / 2 - 150, frame.getHeight() / 2 - 125, 300, 40);
-		usernameLabel.setFont(new Font("Arial", Font.PLAIN, 25));
-		usernameLabel.setHorizontalAlignment(JLabel.CENTER);
-		panel.add(usernameLabel);
-
-		firstNameLabel = new JLabel("First Name: " + firstName);
-		firstNameLabel.setBounds(frame.getWidth() / 2 - 150, frame.getHeight() / 2 - 50, 300, 40);
-		firstNameLabel.setFont(new Font("Arial", Font.PLAIN, 25));
-		firstNameLabel.setHorizontalAlignment(JLabel.CENTER);
-		panel.add(firstNameLabel);
-
-		lastNameLabel = new JLabel("Last Name: " + lastName);
-		lastNameLabel.setBounds(frame.getWidth() / 2 - 150, frame.getHeight() / 2 + 25, 300, 40);
-		lastNameLabel.setFont(new Font("Arial", Font.PLAIN, 25));
-		lastNameLabel.setHorizontalAlignment(JLabel.CENTER);
-		panel.add(lastNameLabel);
-
-		emailLabel = new JLabel("Email: " + email);
-		emailLabel.setBounds(frame.getWidth() / 2 - 150, frame.getHeight() / 2 + 100, 300, 40);
-		emailLabel.setFont(new Font("Arial", Font.PLAIN, 25));
-		emailLabel.setHorizontalAlignment(JLabel.CENTER);
-		panel.add(emailLabel);
-
-		frame.setVisible(true);
-
-	}
 }
