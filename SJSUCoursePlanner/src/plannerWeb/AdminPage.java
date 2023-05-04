@@ -32,8 +32,7 @@ public class AdminPage extends JFrame implements ActionListener {
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		String[] adminOptions = { "Add User", "Remove User", "Add Course", "Remove Course", "Add Required Information",
-				"View Course Planner" };
+		String[] adminOptions = { "Add User", "Remove User", "Add Course", "Remove Course", "View Courses" };
 
 		adminOptionsBox = new JComboBox<String>(adminOptions);
 		adminOptionsBox.setBounds(100, 220, 200, 25);
@@ -56,9 +55,6 @@ public class AdminPage extends JFrame implements ActionListener {
 		});
 		this.add(adminLogoutBtn);
 
-		adminWelcomeLabel = new JLabel("Welcome Admin");
-
-		adminWelcomeLabel = new JLabel("Welcome Admin!");
 		adminWelcomeLabel = new JLabel("Welcome Admin!");
 		adminWelcomeLabel.setHorizontalAlignment(JLabel.CENTER);
 		adminWelcomeLabel.setFont(new Font("Serif", Font.BOLD, 50));
@@ -78,12 +74,10 @@ public class AdminPage extends JFrame implements ActionListener {
 				deleteUser();
 
 			} else if (((String) adminOptionsBox.getSelectedItem()).equals("Add Course")) {
-				addCourse();
+				selectStudent();
 
 			} else if (((String) adminOptionsBox.getSelectedItem()).equals("Remove Course")) {
-				removeCourse();
 
-			} else if (((String) adminOptionsBox.getSelectedItem()).equals("Add Required Information")) {
 
 			} else if (((String) adminOptionsBox.getSelectedItem()).equals("View Courses")) {
 				// create a new frame to display the courses
@@ -107,13 +101,19 @@ public class AdminPage extends JFrame implements ActionListener {
 					courseTextArea.setText("Course data not found.");
 				}
 
+				// add the text area to a scroll pane
+				JScrollPane scrollPane = new JScrollPane(courseTextArea);
+				scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+				// add the scroll pane to the frame and display it
+				courseFrame.add(scrollPane);
+				courseFrame.setVisible(true);
 			}
-			if (e.getSource() == adminLogoutBtn) {
-				this.setVisible(false);
-				this.dispose();
-				Planner.homepage();
-			} else {
-			}
+
+		} else
+
+		{
+
 		}
 	}
 
@@ -150,108 +150,35 @@ public class AdminPage extends JFrame implements ActionListener {
 		}
 	}
 
-	private void addCourse() {
-		JFrame addCourseFrame = new JFrame("Add Course");
-		addCourseFrame.setSize(400, 300);
-		addCourseFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		addCourseFrame.setLayout(null);
-		addCourseFrame.setLocationRelativeTo(null);
+	public static void selectStudent(){
+		JFrame addFrame = new JFrame("Select Student");
+		addFrame.setSize(400, 300);
+		addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		addFrame.setLayout(null);
+		addFrame.setLocationRelativeTo(null);
 
-		JLabel courseNumberLabel = new JLabel("Course Num:");
-		courseNumberLabel.setBounds(50, 50, 100, 25);
-		addCourseFrame.add(courseNumberLabel);
+		JLabel usernameLabel = new JLabel("Enter student username:");
+		usernameLabel.setBounds(125, 90, 200, 25);
+		addFrame.add(usernameLabel);
 
-		JTextField courseNumberField = new JTextField();
-		courseNumberField.setBounds(150, 50, 200, 25);
-		addCourseFrame.add(courseNumberField);
+		JTextField usernameField = new JTextField();
+		usernameField.setBounds(100, 150, 200, 25);
+		addFrame.add(usernameField);
 
-		JLabel courseUnitsLabel = new JLabel("Course Units:");
-		courseUnitsLabel.setBounds(50, 80, 100, 25);
-		addCourseFrame.add(courseUnitsLabel);
-
-		JTextField courseUnitsField = new JTextField();
-		courseUnitsField.setBounds(150, 80, 200, 25);
-		addCourseFrame.add(courseUnitsField);
-
-		JLabel courseNameLabel = new JLabel("Course Name:");
-		courseNameLabel.setBounds(50, 110, 100, 25);
-		addCourseFrame.add(courseNameLabel);
-
-		JTextField courseNameField = new JTextField();
-		courseNameField.setBounds(150, 110, 200, 25);
-		addCourseFrame.add(courseNameField);
-
-		JLabel professorLabel = new JLabel("Professor:");
-		professorLabel.setBounds(50, 140, 100, 25);
-		addCourseFrame.add(professorLabel);
-
-		JTextField professorField = new JTextField();
-		professorField.setBounds(150, 140, 200, 25);
-		addCourseFrame.add(professorField);
-
-		JButton addButton = new JButton("Add Course");
+		JButton addButton = new JButton("Select Student");
 		addButton.setBounds(150, 200, 100, 25);
 		addButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String courseNumber = courseNumberField.getText();
-				String courseUnits = courseUnitsField.getText();
-				String courseName = courseNameField.getText();
-				String professor = professorField.getText();
-
-				addCourseFrame.dispose();
+				String currentUsername = usernameField.getText();
+				addFrame.dispose();
+				StudentPage.addCourse(currentUsername);
 			}
 		});
-		addCourseFrame.add(addButton);
+		addFrame.add(addButton);
 
-		addCourseFrame.setVisible(true);
-	}
+		addFrame.setVisible(true);
 
-	private void removeCourse() {
-		JFrame removeCourseFrame = new JFrame("Remove Course");
-		removeCourseFrame.setSize(400, 300);
-		removeCourseFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		removeCourseFrame.setLayout(null);
-		removeCourseFrame.setLocationRelativeTo(null);
-
-		JLabel courseNumberLabel = new JLabel("Course Num:");
-		courseNumberLabel.setBounds(50, 50, 100, 25);
-		removeCourseFrame.add(courseNumberLabel);
-
-		JTextField courseNumberField = new JTextField();
-		courseNumberField.setBounds(150, 50, 200, 25);
-		removeCourseFrame.add(courseNumberField);
-
-		JLabel courseUnitsLabel = new JLabel("Course Units:");
-		courseUnitsLabel.setBounds(50, 80, 100, 25);
-		removeCourseFrame.add(courseUnitsLabel);
-
-		JTextField courseUnitsField = new JTextField();
-		courseUnitsField.setBounds(150, 80, 200, 25);
-		removeCourseFrame.add(courseUnitsField);
-
-		JLabel courseNameLabel = new JLabel("Course Name:");
-		courseNameLabel.setBounds(50, 110, 100, 25);
-		removeCourseFrame.add(courseNameLabel);
-
-		JTextField courseNameField = new JTextField();
-		courseNameField.setBounds(150, 110, 200, 25);
-		removeCourseFrame.add(courseNameField);
-
-		JButton addButton = new JButton("Remove");
-		addButton.setBounds(150, 200, 100, 25);
-		addButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String courseNumber = courseNumberField.getText();
-				String courseUnits = courseUnitsField.getText();
-				String courseName = courseNameField.getText();
-				removeCourseFrame.dispose();
-			}
-		});
-		removeCourseFrame.add(addButton);
-
-		removeCourseFrame.setVisible(true);
 	}
 
 	public static void main(String[] args) {

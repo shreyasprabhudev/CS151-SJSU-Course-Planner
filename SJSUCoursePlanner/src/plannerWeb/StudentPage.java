@@ -6,12 +6,10 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -26,21 +24,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import courseplanner.Student;
-import courseplanner.User;
 import plannerWeb.*;
 
 public class StudentPage extends JFrame implements ActionListener {
-	List<Student> studentList = new ArrayList<>();
 	JComboBox<String> majorBox;
 	JComboBox<String> stuOptBox;
 	JLabel major;
 	JLabel studentWelcomeLabel;
 	JButton majorConfirmBtn;
 	JButton stuOptConfirmBtn;
-
-	JButton stuLogoutBtn;
-
 	JButton logoutButton;
 
 	JMenuItem compSci;
@@ -61,9 +53,12 @@ public class StudentPage extends JFrame implements ActionListener {
 	JMenuItem soc;
 	JMenuItem pubHealth;
 	JMenuItem chem;
+
 	String username;
 
-	public StudentPage() {
+	StudentPage(String username, boolean isAdvisor) {
+		
+		this.username = username;
 
 		this.setSize(1400, 800);
 		this.setLayout(null);
@@ -86,10 +81,13 @@ public class StudentPage extends JFrame implements ActionListener {
 		majorConfirmBtn.setBounds(150, 280, 90, 25);
 		this.add(majorConfirmBtn);
 
-		studentWelcomeLabel = new JLabel("Welcome Student");
+		if(isAdvisor)
+			studentWelcomeLabel = new JLabel("Welcome Advisor! Currently Viewing " + username);
+		else
+			studentWelcomeLabel = new JLabel("Welcome " + username + "!");
 		studentWelcomeLabel.setHorizontalAlignment(JLabel.CENTER);
 		studentWelcomeLabel.setFont(new Font("Serif", Font.BOLD, 50));
-		studentWelcomeLabel.setBounds(90, 80, 400, 80);
+		studentWelcomeLabel.setBounds(90, 80, 1000, 80);
 		this.add(studentWelcomeLabel);
 
 		major = new JLabel("Select Major");
@@ -103,18 +101,12 @@ public class StudentPage extends JFrame implements ActionListener {
 
 		stuOptConfirmBtn = new JButton("Confirm");
 		stuOptConfirmBtn.addActionListener(this);
-		stuOptConfirmBtn.setBounds(100, 450, 90, 25);
+		stuOptConfirmBtn.setBounds(150, 450, 90, 25);
 		this.add(stuOptConfirmBtn);
 
-		stuLogoutBtn = new JButton("Logout");
-		stuLogoutBtn.addActionListener(this);
-		stuLogoutBtn.setBounds(210, 450, 90, 25);
-		this.add(stuLogoutBtn);
-
-		// new added section for log out
+		//new added section for log out 
 		logoutButton = new JButton("Logout");
 		logoutButton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				dispose();
@@ -175,9 +167,9 @@ public class StudentPage extends JFrame implements ActionListener {
 		if (e.getSource() == stuOptConfirmBtn) {
 
 			if ((String) stuOptBox.getSelectedItem() == "Add Course") {
-				addCourse();
+				addCourse(this.username);
 			} else if ((String) stuOptBox.getSelectedItem() == "Remove Course") {
-				removeCourse();
+				removeCourse(this.username);
 			} else if ((String) stuOptBox.getSelectedItem() == "View Assigned Advisor") {
 				assignAdvisors();
 			}
@@ -208,11 +200,38 @@ public class StudentPage extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, scrollPane, "Classes for " + major, JOptionPane.PLAIN_MESSAGE);
 		} catch (IOException e) {
 			// Handle the exception (e.g. display an error message)
-			e.getMessage();
 		}
 	}
 
-	private void addCourse() {
+	public static void writeStudentFile(String currentUsername, String courseNumber, String courseName, String courseUnits) {
+        try {
+            File file = new File(currentUsername + ".txt");
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+
+        try {
+            File file = new File(currentUsername + ".txt");
+            FileWriter writer = new FileWriter(file, true);
+            writer.write(courseNumber + "," + courseName + "," + courseUnits);
+            writer.write(System.getProperty("line.separator"));
+            writer.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+
+	static void addCourse(String username) {
 		JFrame addFrame = new JFrame("Add Course");
 		addFrame.setSize(400, 300);
 		addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -228,28 +247,20 @@ public class StudentPage extends JFrame implements ActionListener {
 		addFrame.add(courseNumberField);
 
 		JLabel courseUnitsLabel = new JLabel("Course Units:");
-		courseUnitsLabel.setBounds(50, 80, 100, 25);
+		courseUnitsLabel.setBounds(50, 110, 100, 25);
 		addFrame.add(courseUnitsLabel);
 
 		JTextField courseUnitsField = new JTextField();
-		courseUnitsField.setBounds(150, 80, 200, 25);
+		courseUnitsField.setBounds(150, 110, 200, 25);
 		addFrame.add(courseUnitsField);
 
 		JLabel courseNameLabel = new JLabel("Course Name:");
-		courseNameLabel.setBounds(50, 110, 100, 25);
+		courseNameLabel.setBounds(50, 80, 100, 25);
 		addFrame.add(courseNameLabel);
 
 		JTextField courseNameField = new JTextField();
-		courseNameField.setBounds(150, 110, 200, 25);
+		courseNameField.setBounds(150, 80, 200, 25);
 		addFrame.add(courseNameField);
-
-		JLabel professorLabel = new JLabel("Professor:");
-		professorLabel.setBounds(50, 140, 100, 25);
-		addFrame.add(professorLabel);
-
-		JTextField professorField = new JTextField();
-		professorField.setBounds(150, 140, 200, 25);
-		addFrame.add(professorField);
 
 		JButton addButton = new JButton("Add Course");
 		addButton.setBounds(150, 200, 100, 25);
@@ -259,7 +270,8 @@ public class StudentPage extends JFrame implements ActionListener {
 				String courseNumber = courseNumberField.getText();
 				String courseUnits = courseUnitsField.getText();
 				String courseName = courseNameField.getText();
-				String professor = professorField.getText();
+
+				writeStudentFile(username, courseNumber, courseName, courseUnits);
 
 				addFrame.dispose();
 			}
@@ -269,7 +281,7 @@ public class StudentPage extends JFrame implements ActionListener {
 		addFrame.setVisible(true);
 	}
 
-	private void removeCourse() {
+	private void removeCourse(String username) {
         JFrame removeCourseFrame = new JFrame("Remove Course");
         removeCourseFrame.setSize(400, 300);
         removeCourseFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -308,6 +320,7 @@ public class StudentPage extends JFrame implements ActionListener {
                 String courseNumber = courseNumberField.getText();
                 String courseUnits = courseUnitsField.getText();
                 String courseName = courseNameField.getText();
+
                 removeCourseFrame.dispose();
             }
         });
@@ -331,10 +344,13 @@ public class StudentPage extends JFrame implements ActionListener {
 	            }
 	        }
 	    }
-public static void main(String[] args) {
-	new StudentPage();
-}
-	
-}
 
+	public String getUsernameString(){
+		return this.username;
+	}
 
+	public static void main(String[] args) {
+		new StudentPage(null, false);
+	}
+
+}

@@ -260,24 +260,21 @@ public class Planner{
 					String[] fields = getUser(username, password).split(" ");
 
 					if (username.substring(0, 2).equals("SS"))
-						new StudentPage();
+						new StudentPage(username, false);
 					else if (username.substring(0, 2).equals("UA"))
 						new AdminPage();
-<<<<<<< HEAD
-				else if(username.substring(0,2).equals("SA")) {
+					else if(username.substring(0, 2).equals("SA"))
 						new AdvisorPage();
-					}
-					successfulLoginScreen(username, fields[2], fields[3], fields[4]);
-=======
->>>>>>> d98c6c3deb95dbd92501d0ea232528443437ed2f
-				} else if (output.equals("User does not exist")) {
+				}
+				else if (output.equals("User does not exist")) {
 					JOptionPane.showMessageDialog(frame,
-							new Exception("This is not a valid username! Please sign up first!"), "Error Loggin In!",
+							new Exception("This is not a valid username! Please sign up first!"), "Error Logging In!",
 							JOptionPane.ERROR_MESSAGE);
 					panel.removeAll();
 					panel.updateUI();
 					welcomeScreen();
-				} else if (output.equals("Wrong password")) {
+				} 
+				else if (output.equals("Wrong password")) {
 					JOptionPane.showMessageDialog(frame, new PasswordException("Username and password do not match!"),
 							"Password Error!", JOptionPane.ERROR_MESSAGE);
 					panel.removeAll();
@@ -402,10 +399,12 @@ public class Planner{
 					
 					if (username.substring(0, 2).equals("SS")){
 						createStudentFile(username);
-						new StudentPage();
+						new StudentPage(username, false);
 					}
 					else if (username.substring(0, 2).equals("UA"))
 						new AdminPage();
+					else if (username.substring(0, 2).equals("SA"))
+						new AdvisorPage();
 					
 					frame = null;
 				} catch (PasswordException p) {
@@ -419,77 +418,6 @@ public class Planner{
 		createBackButton("selectRole", false);
 
 		frame.setVisible(true);
-	}
-
-	public static void loginScreen() {
-		JLabel userLabel;
-		JTextField userText;
-		JLabel pageTitle;
-		JLabel passwordLabel;
-		JPasswordField passwordText;
-		JButton button;
-
-		pageTitle = new JLabel("Login");
-		pageTitle.setBounds(frame.getHeight() / 2 - 100, 150, 800, 40);
-		pageTitle.setFont(new Font("Arial", Font.PLAIN, 35));
-		pageTitle.setHorizontalAlignment(JLabel.CENTER);
-		panel.add(pageTitle);
-
-		userLabel = new JLabel("Username");
-		userLabel.setBounds(frame.getWidth() / 2 - 150, frame.getHeight() / 2 - 100, 300, 40);
-		userLabel.setFont(new Font("Arial", Font.PLAIN, 25));
-		userLabel.setHorizontalAlignment(JLabel.CENTER);
-		panel.add(userLabel);
-
-		userText = new JTextField(20);
-		userText.setBounds(frame.getWidth() / 2 - 150, frame.getHeight() / 2 - 25, 300, 40);
-		userText.setFont(new Font("Arial", Font.PLAIN, 25));
-		userText.setHorizontalAlignment(JTextField.CENTER);
-		panel.add(userText);
-
-		passwordLabel = new JLabel("Password");
-		passwordLabel.setBounds(frame.getWidth() / 2 - 150, frame.getHeight() / 2 + 50, 300, 40);
-		passwordLabel.setFont(new Font("Arial", Font.PLAIN, 25));
-		passwordLabel.setHorizontalAlignment(JLabel.CENTER);
-		panel.add(passwordLabel);
-
-		passwordText = new JPasswordField();
-		passwordText.setBounds(frame.getWidth() / 2 - 150, frame.getHeight() / 2 + 125, 300, 40);
-		passwordText.setFont(new Font("Arial", Font.PLAIN, 25));
-		passwordText.setHorizontalAlignment(JTextField.CENTER);
-		panel.add(passwordText);
-
-		button = new JButton("Login");
-		button.setBounds(frame.getWidth() / 2 - 100, frame.getHeight() / 2 + 200, 200, 40);
-		button.setFont(new Font("Arial", Font.PLAIN, 25));
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				String username = userText.getText();
-				String password = passwordText.getText();
-
-				String output = checkUser(username, password);
-				if (output.equals("Valid user")) {
-					panel.removeAll();
-					panel.updateUI();
-
-					String[] fields = getUser(username, password).split(" ");
-
-				} else if (output.equals("User does not exist")) {
-					JOptionPane.showMessageDialog(frame,
-							new Exception("This is not a valid username! Please sign up first!"), "Error Loggin In!",
-							JOptionPane.ERROR_MESSAGE);
-				} else if (output.equals("Wrong password")) {
-					JOptionPane.showMessageDialog(frame, new PasswordException("Username and password do not match!"),
-							"Password Error!", JOptionPane.ERROR_MESSAGE);
-				}
-
-			}
-		});
-		panel.add(button);
-
-		frame.setVisible(true);
-
 	}
 
 	public static void readFile() {
@@ -631,25 +559,8 @@ public class Planner{
 			throw new Minimum8CharactersRequired();
 	}
 
-	public static void successScreen(String username) {
-		JLabel pageTitle;
-		JPanel panel = new JPanel();
-		JFrame frame = new JFrame();
-
-		frame.setTitle("Success!");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(1400, 800);
-		frame.setResizable(false);
-		frame.add(panel);
-
-		pageTitle = new JLabel("Success! Welcome " + username + "!");
-		pageTitle.setBounds(frame.getWidth() / 2 - 400, frame.getHeight() / 2 - 75, 800, 40);
-		pageTitle.setFont(new Font("Arial", Font.PLAIN, 35));
-		pageTitle.setHorizontalAlignment(JLabel.CENTER);
-		panel.add(pageTitle);
-
-		frame.setVisible(true);
-
+	public static ArrayList<String> getUsers(){
+		return users;
 	}
 
 }
