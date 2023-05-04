@@ -1,10 +1,13 @@
 package courseplanner;
 
+import plannerWeb.*;
 import java.io.File;
 import java.util.ArrayList;
 
+import plannerWeb.UserInterface;
+
 public class Controller {
-	//private UserInterface ui;
+	private UserInterface ui;
 	public PlannerSystem system;
 
 	/*
@@ -70,16 +73,6 @@ public class Controller {
 		system.removeCourse(name);
 	}
 
-	// SET COURSE PROFESSOR
-	public void setProfessorForCourse(String courseName, String professorId) {
-		system.setProfessorForCourse(courseName, professorId);
-	}
-
-	// REMOVE COURSE PROFESSOR
-	public void removeProfessorFromCourse(String courseName) {
-		system.removeProfessorFromCourse(courseName);
-	}
-
 	// ADD STUDENT TO COURSE - Returns boolean indicating if operation is success.
 	// Failure may occur if student is already in that course.
 	public boolean addStudentToCourse(String courseName, String studentId) {
@@ -96,7 +89,7 @@ public class Controller {
 	// Special: VIEW ALL COURSES - Likely to be handled by GUI.
 	
 	//GENERATES A TXT DETAILING ALL STUDENTS IN THEIR COURSES + GRADES
-	public void generateClassRosterTxt() {
+	public void generateClassRosterTxt() { //change to studentcourse
 		system.generateClassRosterTxt();
 	}
 	
@@ -111,36 +104,11 @@ public class Controller {
 
 	// REMOVE STUDENT FROM COURSE - Use removeStudentFromCourse from Admin.
 
-	// ADD ASSIGNEMNT
-	public void addAssignment(String courseName, String studentID, Assignment in) {
-		system.addAssignment(courseName, studentID, in);
-	}
-
-	// EDIT ASSIGNMENT - For now, only edits the points earned. Not sure just
-	// exactly how much we want to edit.
-	public void editAssignment(String courseName, String studentId, String asgnName, double newPointsEarned) {
-		system.editAssignment(courseName, studentId, asgnName, newPointsEarned);
-	}
-
-	// REMOVE ASSIGNMENT
-	public void removeAssignment(String courseName, String asgnName) {
-		system.removeAssignment(courseName, asgnName);
-	}
-
-  //COMPLETE COURSE
-	public void completeCourse(String courseName) {
-		system.completeCourse(courseName);
-	}
-
 	// VIEW STUDENTS + GRADES - Handled by the GUI after using getters from the
 	// backend??
 
 	// ----------------------------- STUDENT OPTIONS -----------------------------
 
-	// Prints a txt file containing courses and past grades. WARNING: EXPERIMENTAL
-	public void printTranscript() {
-		system.printTranscript();
-	}
 
 	// ----------------------------- MISC. OPTIONS -----------------------------
 
@@ -159,8 +127,8 @@ public class Controller {
 		return system.getAllCourses();
 	}
 	
-	public Course getCourse(String in) {
-		return system.getCourse(in);
+	public Course getCourse(String course) {
+		return system.getCourse(course);
 	}
 	
 	// Saves the information of the gradebook into a txt file. 

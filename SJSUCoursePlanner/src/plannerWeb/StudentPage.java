@@ -4,10 +4,16 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,6 +26,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 import plannerWeb.*;
 
@@ -51,7 +58,11 @@ public class StudentPage extends JFrame implements ActionListener {
 	JMenuItem pubHealth;
 	JMenuItem chem;
 
-	StudentPage() {
+	String username;
+
+	StudentPage(String username, boolean isAdvisor) {
+		
+		this.username = username;
 
 		this.setSize(1400, 800);
 		this.setLayout(null);
@@ -64,7 +75,7 @@ public class StudentPage extends JFrame implements ActionListener {
 				"Civil Engineering", "Interdisciplinary Engineering", "Mathematics", "Physics", "Biology",
 				"Chemistry" };
 
-		String[] studentOpt = { "Add Course", "Remove Course", "View Assigned Advisor" };
+		String[] studentOpt = { "Add Course", "Remove Course", "View Assigned Advisor", "View Courses" };
 		majorBox = new JComboBox<>(majors);
 		majorBox.setBounds(100, 220, 200, 25);
 		this.add(majorBox);
@@ -74,10 +85,13 @@ public class StudentPage extends JFrame implements ActionListener {
 		majorConfirmBtn.setBounds(150, 280, 90, 25);
 		this.add(majorConfirmBtn);
 
-		studentWelcomeLabel = new JLabel("Welcome Student");
+		if(isAdvisor)
+			studentWelcomeLabel = new JLabel("Welcome Advisor! Currently Viewing " + username);
+		else
+			studentWelcomeLabel = new JLabel("Welcome " + username + "!");
 		studentWelcomeLabel.setHorizontalAlignment(JLabel.CENTER);
 		studentWelcomeLabel.setFont(new Font("Serif", Font.BOLD, 50));
-		studentWelcomeLabel.setBounds(90, 80, 400, 80);
+		studentWelcomeLabel.setBounds(90, 80, 1000, 80);
 		this.add(studentWelcomeLabel);
 
 		major = new JLabel("Select Major");
@@ -97,11 +111,10 @@ public class StudentPage extends JFrame implements ActionListener {
 		//new added section for log out 
 		logoutButton = new JButton("Logout");
 		logoutButton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				dispose();
-				Planner.selectUserTypeScreen();
+				Planner.homepage();
 			}
 		});
 		logoutButton.setBounds(1200, 20, 150, 30);
@@ -156,12 +169,16 @@ public class StudentPage extends JFrame implements ActionListener {
 			}
 		}
 		if (e.getSource() == stuOptConfirmBtn) {
-			if ((String) stuOptBox.getSelectedItem() == "Add course") {
 
-			} else if ((String) stuOptBox.getSelectedItem() == "Remove course") {
-
+			if ((String) stuOptBox.getSelectedItem() == "Add Course") {
+				addCourse(this.username);
+			} else if ((String) stuOptBox.getSelectedItem() == "Remove Course") {
+				removeCourse(this.username);
+			} 
+			else if ((String) stuOptBox.getSelectedItem() == "View Courses") {
+				viewCourses(username);
 			} else if ((String) stuOptBox.getSelectedItem() == "View Assigned Advisor") {
-
+				assignAdvisors();
 			}
 
 		}
@@ -193,8 +210,214 @@ public class StudentPage extends JFrame implements ActionListener {
 		}
 	}
 
+	private void viewCourses(String username) {
+		try {
+			// Open the text file containing the courses
+			FileReader fileReader = new FileReader(username + ".txt");
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+			// Read each line of the file and add it to a list of classes
+			List<String> classes = new ArrayList<>();
+			String line;
+			while ((line = bufferedReader.readLine()) != null) {
+				String[] courseInfo = line.split(",");
+				classes.add("Class Number: " + courseInfo[0] + "; Class Name: " + courseInfo[1] + "; Units: " + courseInfo[2]);
+			}
+
+			// Close the file reader
+			bufferedReader.close();
+
+			// Display the list of classes in a Swing component
+			JList<String> classList = new JList<>(classes.toArray(new String[0]));
+			JScrollPane scrollPane = new JScrollPane(classList);
+			JOptionPane.showMessageDialog(null, scrollPane, "Classes for " + major, JOptionPane.PLAIN_MESSAGE);
+		} catch (IOException e) {
+			// Handle the exception (e.g. display an error message)
+		}
+	}
+
+	public static void writeStudentFile(String currentUsername, String courseNumber, String courseName, String courseUnits) {
+        try {
+            File file = new File(currentUsername + ".txt");
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+
+        try {
+            File file = new File(currentUsername + ".txt");
+            FileWriter writer = new FileWriter(file, true);
+            writer.write(courseNumber + "," + courseName + "," + courseUnits);
+            writer.write(System.getProperty("line.separator"));
+            writer.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+
+	static void addCourse(String username) {
+		JFrame addFrame = new JFrame("Add Course");
+		addFrame.setSize(400, 300);
+		addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		addFrame.setLayout(null);
+		addFrame.setLocationRelativeTo(null);
+
+		JLabel courseNumberLabel = new JLabel("Course Num:");
+		courseNumberLabel.setBounds(50, 50, 100, 25);
+		addFrame.add(courseNumberLabel);
+
+		JTextField courseNumberField = new JTextField();
+		courseNumberField.setBounds(150, 50, 200, 25);
+		addFrame.add(courseNumberField);
+
+		JLabel courseUnitsLabel = new JLabel("Course Units:");
+		courseUnitsLabel.setBounds(50, 110, 100, 25);
+		addFrame.add(courseUnitsLabel);
+
+		JTextField courseUnitsField = new JTextField();
+		courseUnitsField.setBounds(150, 110, 200, 25);
+		addFrame.add(courseUnitsField);
+
+		JLabel courseNameLabel = new JLabel("Course Name:");
+		courseNameLabel.setBounds(50, 80, 100, 25);
+		addFrame.add(courseNameLabel);
+
+		JTextField courseNameField = new JTextField();
+		courseNameField.setBounds(150, 80, 200, 25);
+		addFrame.add(courseNameField);
+
+		JButton addButton = new JButton("Add Course");
+		addButton.setBounds(150, 200, 100, 25);
+		addButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String courseNumber = courseNumberField.getText();
+				String courseUnits = courseUnitsField.getText();
+				String courseName = courseNameField.getText();
+
+				writeStudentFile(username, courseNumber, courseName, courseUnits);
+
+				addFrame.dispose();
+			}
+		});
+		addFrame.add(addButton);
+
+		addFrame.setVisible(true);
+	}
+
+	private void removeCourse(String username) {
+        JFrame removeCourseFrame = new JFrame("Remove Course");
+        removeCourseFrame.setSize(400, 300);
+        removeCourseFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        removeCourseFrame.setLayout(null);
+        removeCourseFrame.setLocationRelativeTo(null);
+
+        JLabel courseNumberLabel = new JLabel("Enter the Course Number:");
+        courseNumberLabel.setBounds(110, 100, 300, 25);
+        removeCourseFrame.add(courseNumberLabel);
+
+        JTextField courseNumberField = new JTextField();
+        courseNumberField.setBounds(110, 150, 200, 25);
+        removeCourseFrame.add(courseNumberField);
+
+        JButton addButton = new JButton("Remove");
+        addButton.setBounds(150, 200, 100, 25);
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String courseNumber = courseNumberField.getText();
+                removeText(username, courseNumber);
+
+                removeCourseFrame.dispose();
+            }
+        });
+        removeCourseFrame.add(addButton);
+
+        removeCourseFrame.setVisible(true);
+    }
+
+	public static void removeText(String username, String courseNumber){
+		try{
+			// PrintWriter object for output.txt
+			PrintWriter pw = new PrintWriter("output.txt");
+			File file = new File(username + ".txt");
+			String tempFileName = username + ".txt";
+						  
+			// BufferedReader object for input.txt
+			BufferedReader br1 = new BufferedReader(new FileReader(tempFileName));
+			  
+			String line1 = br1.readLine();
+			String deleted_line = "";
+
+			try {
+				Scanner myReader = new Scanner(file);
+				while (myReader.hasNextLine()) {
+					String data = myReader.nextLine();
+					String[] partsOfLine = data.split(",");
+					if(partsOfLine[0].equals(courseNumber))
+						deleted_line = data;
+				}
+				myReader.close();
+			} catch (FileNotFoundException e) {
+				System.out.println("An error occurred.");
+				e.printStackTrace();
+			}
+
+			while(line1 != null){
+				if(!line1.equals(deleted_line))
+					pw.println(line1);
+				
+				line1 = br1.readLine(); 
+			}
+			
+			pw.flush();
+			  
+			// closing resources
+			br1.close();
+			pw.close();
+
+			file.delete();
+			File newFile = new File("output.txt");
+			newFile.renameTo(file);
+			System.out.println("File operation performed successfully");
+		}
+		catch(IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
+	
+	private void assignAdvisors() {
+	    // Read in list of users from file
+		  String lastName = JOptionPane.showInputDialog("Enter the first letter of the student's last name:");
+	        if (lastName != null && lastName.length() > 0) {
+	            char firstLetter = Character.toUpperCase(lastName.charAt(0));
+	            String advisorA = "Advisor A";
+	            String advisorB = "Advisor B"
+;	            if (advisorA != null && firstLetter >= 'A' && firstLetter <= 'M') {
+	                JOptionPane.showMessageDialog(null, advisorA, "Student Advisor", JOptionPane.INFORMATION_MESSAGE);
+	            }else if(advisorB != null && firstLetter >= 'A' && firstLetter <= 'M') {
+	                JOptionPane.showMessageDialog(null, advisorB, "Student Advisor", JOptionPane.INFORMATION_MESSAGE);
+
+	            }
+	        }
+	    }
+
+	public String getUsernameString(){
+		return this.username;
+	}
+
 	public static void main(String[] args) {
-		new StudentPage();
+		new StudentPage(null, false);
 	}
 
 }

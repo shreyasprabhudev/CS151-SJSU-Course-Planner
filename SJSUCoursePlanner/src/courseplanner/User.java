@@ -1,6 +1,6 @@
 package courseplanner;
 
-public abstract class User {
+public class User {
 	private String firstName;
 	private String lastName;
 	private String id;
@@ -8,6 +8,11 @@ public abstract class User {
 
 	public User() {
 
+	}
+	
+	public User(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 
 	public User(String firstName, String lastName, String id, String password) {
@@ -49,7 +54,8 @@ public abstract class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	
 
 
 }

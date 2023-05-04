@@ -3,6 +3,7 @@ package plannerWeb;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,14 +24,22 @@ public class AdvisorPage extends JFrame implements ActionListener {
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		String[] advisorOptions = { "View User", "View Course Planner" };
+		String[] advisorOptions = getUsernames(Planner.getUsers());
 
 		advisorOptionsBox = new JComboBox<String>(advisorOptions);
 		advisorOptionsBox.setBounds(100, 220, 200, 25);
 		this.add(advisorOptionsBox);
 
 		advisorOptionConfirmBtn = new JButton("Confirm");
-		advisorOptionConfirmBtn.addActionListener(this);
+		advisorOptionConfirmBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for(String username : advisorOptions){
+					if(((String) advisorOptionsBox.getSelectedItem() == username))
+						new StudentPage(username, true);
+				}
+				
+			}
+		});
 		advisorOptionConfirmBtn.setBounds(210, 350, 90, 25);
 		this.add(advisorOptionConfirmBtn);
 
@@ -43,11 +52,10 @@ public class AdvisorPage extends JFrame implements ActionListener {
 		// new added section for log out
 		advisorLogoutBtn = new JButton("Logout");
 		advisorLogoutBtn.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				dispose();
-				Planner.selectUserTypeScreen();
+				Planner.homepage();
 			}
 		});
 		advisorLogoutBtn.setBounds(1200, 20, 150, 30);
@@ -56,25 +64,33 @@ public class AdvisorPage extends JFrame implements ActionListener {
 		this.setVisible(true);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if (e.getSource() == advisorOptionConfirmBtn) {
-			if (((String) advisorOptionsBox.getSelectedItem()).equals("Add User")) {
-
-			} else if (((String) advisorOptionsBox.getSelectedItem()).equals("Remove User")) {
-
-			} else if (((String) advisorOptionsBox.getSelectedItem()).equals("View Student Planner")) {
-
-			}
-
-		} else {
-
+	public static String[] getUsernames(ArrayList<String> users){
+		ArrayList<String> usernames = new ArrayList<String>();
+		for(int i = 0; i < users.size(); i++){
+			String currentLine = users.get(i);
+			String[] fields = currentLine.split(" ");
+			String currentUsername = fields[0];
+			if(currentUsername.substring(0, 2).equals("SS"))
+				usernames.add(currentUsername);
 		}
+
+		String[] final_arr = new String[usernames.size()];
+		for(int i = 0; i < usernames.size(); i++)
+			final_arr[i] = usernames.get(i);
+		return final_arr;
 	}
 
+	
+
 	public static void main(String[] args) {
+		Planner.readFile();
 		new AdvisorPage();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
 	}
 
 }

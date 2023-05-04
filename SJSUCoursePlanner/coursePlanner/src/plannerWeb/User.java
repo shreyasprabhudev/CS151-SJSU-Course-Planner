@@ -1,18 +1,23 @@
 package plannerWeb;
 
-public class User {
+import java.util.ArrayList;
+
+public abstract class User {
 	private String firstName;
 	private String lastName;
-	private String email;
+	private String id;
 	private String password;
-	private String username;
 
-	public User(String firstName, String lastName, String email, String password, String username) {
+	public User() {
+
+	}
+
+	public User(String firstName, String lastName, String id, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.email = email;
+		this.id = id;
 		this.password = password;
-		this.username = username;
+
 	}
 
 	public String getFirstName() {
@@ -31,12 +36,12 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getId() {
+		return id;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getPassword() {
@@ -47,11 +52,8 @@ public class User {
 		this.password = password;
 	}
 
-	public String getUsername() {
-		return username;
-	}
+	public abstract boolean login();
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	public abstract void viewCourses();
+
 }
