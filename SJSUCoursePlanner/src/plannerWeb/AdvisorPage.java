@@ -35,7 +35,7 @@ public class AdvisorPage extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				for(String username : advisorOptions){
 					if(((String) advisorOptionsBox.getSelectedItem() == username))
-						new StudentPage(username, true);
+						new StudentPage(username, true, null);
 				}
 				
 			}

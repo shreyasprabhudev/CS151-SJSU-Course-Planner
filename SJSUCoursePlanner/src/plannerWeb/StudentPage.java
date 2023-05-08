@@ -1,5 +1,7 @@
 package plannerWeb;
 
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +28,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 
 import plannerWeb.*;
 
@@ -60,14 +66,14 @@ public class StudentPage extends JFrame implements ActionListener {
 
 	String username;
 
-	StudentPage(String username, boolean isAdvisor) {
+	public StudentPage(String username, boolean isAdvisor, String adminUsername) {
 		
 		this.username = username;
 
 		this.setSize(1400, 800);
-		this.setLayout(null);
 		this.setTitle("Majors");
 		this.setResizable(false);
+		this.setLayout(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		String[] majors = { "Computer Science", "Software Engineering", "Electrical Engineering",
@@ -85,13 +91,26 @@ public class StudentPage extends JFrame implements ActionListener {
 		majorConfirmBtn.setBounds(150, 280, 90, 25);
 		this.add(majorConfirmBtn);
 
-		if(isAdvisor)
+		if(isAdvisor){
 			studentWelcomeLabel = new JLabel("Welcome Advisor! Currently Viewing " + username);
-		else
+			JButton returnToAdminButton = new JButton("Return to Admin");
+			returnToAdminButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					setVisible(false);
+					dispose();
+					new AdminPage(adminUsername);
+				}
+			});
+			returnToAdminButton.setBounds(1000, 20, 150, 30);
+			add(returnToAdminButton);
+		}
+		else{
 			studentWelcomeLabel = new JLabel("Welcome " + username + "!");
+		}
+		
 		studentWelcomeLabel.setHorizontalAlignment(JLabel.CENTER);
 		studentWelcomeLabel.setFont(new Font("Serif", Font.BOLD, 50));
-		studentWelcomeLabel.setBounds(90, 80, 1000, 80);
+		studentWelcomeLabel.setBounds(500, 80, 450, 80);
 		this.add(studentWelcomeLabel);
 
 		major = new JLabel("Select Major");
@@ -128,43 +147,43 @@ public class StudentPage extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == majorConfirmBtn) {
 			if ((String) majorBox.getSelectedItem() == "Computer Science") {
-				displayClasses("cs");
+				displayClasses("Computer Science");
 
 			} else if ((String) majorBox.getSelectedItem() == "Software Engineering") {
-				displayClasses("swe");
+				displayClasses("Software Engineering");
 
 			} else if ((String) majorBox.getSelectedItem() == "Electrical Engineering") {
-				displayClasses("ee");
+				displayClasses("Electrical Engineering");
 
 			} else if ((String) majorBox.getSelectedItem() == "Aerospace Engineering") {
-				displayClasses("aeroe");
+				displayClasses("Aerospace Engineering");
 
 			} else if ((String) majorBox.getSelectedItem() == "Biomedical Engineering") {
-				displayClasses("bme");
+				displayClasses("Biomedical Engineering");
 
 			} else if ((String) majorBox.getSelectedItem() == "Mechanical Engineering") {
-				displayClasses("meche");
+				displayClasses("Mechanical Engineering");
 
 			} else if ((String) majorBox.getSelectedItem() == "Industrial Engineering") {
-				displayClasses("industriale");
+				displayClasses("Industrial Engineering");
 
 			} else if ((String) majorBox.getSelectedItem() == "Civil Engineering") {
-				displayClasses("civile");
+				displayClasses("Civil Engineering");
 
 			} else if ((String) majorBox.getSelectedItem() == "Interdisciplinary Engineering") {
-				displayClasses("interdisciplinarye");
+				displayClasses("Interdisciplinary Engineering");
 
 			} else if ((String) majorBox.getSelectedItem() == "Mathematics") {
-				displayClasses("math");
+				displayClasses("Mathematics");
 
 			} else if ((String) majorBox.getSelectedItem() == "Physics") {
-				displayClasses("physics");
+				displayClasses("Physics");
 
 			} else if ((String) majorBox.getSelectedItem() == "Biology") {
-				displayClasses("bio");
+				displayClasses("Biology");
 
 			} else if ((String) majorBox.getSelectedItem() == "Chemistry") {
-				displayClasses("chem");
+				displayClasses("Chemistry");
 
 			}
 		}
@@ -188,7 +207,7 @@ public class StudentPage extends JFrame implements ActionListener {
 	private void displayClasses(String major) {
 		try {
 			// Open the text file containing the classes
-			FileReader fileReader = new FileReader(major + ".txt");
+			FileReader fileReader = new FileReader("SJSUCoursePlanner/Majors/" + major + ".txt");
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
 			// Read each line of the file and add it to a list of classes
@@ -210,27 +229,70 @@ public class StudentPage extends JFrame implements ActionListener {
 		}
 	}
 
-	private void viewCourses(String username) {
+	private static void viewCourses(String username) {
 		try {
 			// Open the text file containing the courses
-			FileReader fileReader = new FileReader(username + ".txt");
+			FileReader fileReader = new FileReader("SJSUCoursePlanner/StudentCourses/" + username + ".txt");
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
+			JFrame addFrame = new JFrame("View Courses");
+			addFrame.setSize(500, 500);
+			addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			addFrame.setLocationRelativeTo(null);
+
+			ArrayList<String[]> data = new ArrayList<>();
+
 			// Read each line of the file and add it to a list of classes
-			List<String> classes = new ArrayList<>();
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
 				String[] courseInfo = line.split(",");
-				classes.add("Class Number: " + courseInfo[0] + "; Class Name: " + courseInfo[1] + "; Units: " + courseInfo[2]);
+				data.add(courseInfo);
+			}
+
+			String[][] arr_data = new String[data.size()][3];
+			for(int i = 0; i < data.size(); i++){
+				String[] current = data.get(i);
+				arr_data[i][0] = current[0];
+				arr_data[i][1] = current[1];
+				arr_data[i][2] = current[2];
+				System.out.println(arr_data[i][0] + " " + arr_data[i][1] + " " + arr_data[i][2]);
 			}
 
 			// Close the file reader
 			bufferedReader.close();
 
 			// Display the list of classes in a Swing component
+
+			String column[]={"Course ID","Course Name","Units"};
+
+			JTable studentTable = new JTable(arr_data, column){
+				public boolean editCellAt(int row, int column, java.util.EventObject e) {
+					return false;
+				 }
+			};
+			DefaultTableCellRenderer renderer = (DefaultTableCellRenderer)studentTable.getDefaultRenderer(Object.class);
+       		renderer.setHorizontalAlignment(SwingConstants.CENTER);
+			   for (int i=  0; i < studentTable.getColumnCount(); i++){
+				studentTable.setDefaultRenderer(studentTable.getColumnClass(i),renderer);
+			}
+			studentTable.setFont(new Font("Serif", Font.PLAIN, 20));
+			studentTable.setBounds(500, 500, 500, 500);			
+			studentTable.setRowHeight(30);
+			studentTable.getTableHeader().setReorderingAllowed(false);
+			studentTable.getTableHeader().setResizingAllowed(false);
+			studentTable.getTableHeader().setDefaultRenderer(new HeaderRenderer(studentTable));
+			studentTable.getTableHeader().setFont(new Font(null, Font.BOLD, 23));
+			JScrollPane sp = new JScrollPane(studentTable, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+			addFrame.getContentPane().add(sp);
+			
+			addFrame.setVisible(true);
+
+			/* 
 			JList<String> classList = new JList<>(classes.toArray(new String[0]));
 			JScrollPane scrollPane = new JScrollPane(classList);
 			JOptionPane.showMessageDialog(null, scrollPane, "Classes for " + major, JOptionPane.PLAIN_MESSAGE);
+
+			*/
 		} catch (IOException e) {
 			// Handle the exception (e.g. display an error message)
 		}
@@ -238,7 +300,7 @@ public class StudentPage extends JFrame implements ActionListener {
 
 	public static void writeStudentFile(String currentUsername, String courseNumber, String courseName, String courseUnits) {
         try {
-            File file = new File(currentUsername + ".txt");
+            File file = new File("SJSUCoursePlanner/StudentCourses/" + currentUsername + ".txt");
             if (file.createNewFile()) {
                 System.out.println("File created: " + file.getName());
             } else {
@@ -251,7 +313,7 @@ public class StudentPage extends JFrame implements ActionListener {
 
 
         try {
-            File file = new File(currentUsername + ".txt");
+            File file = new File("SJSUCoursePlanner/StudentCourses/" + currentUsername + ".txt");
             FileWriter writer = new FileWriter(file, true);
             writer.write(courseNumber + "," + courseName + "," + courseUnits);
             writer.write(System.getProperty("line.separator"));
@@ -271,7 +333,7 @@ public class StudentPage extends JFrame implements ActionListener {
 		addFrame.setLayout(null);
 		addFrame.setLocationRelativeTo(null);
 
-		JLabel courseNumberLabel = new JLabel("Course Num:");
+		JLabel courseNumberLabel = new JLabel("Course Number:");
 		courseNumberLabel.setBounds(50, 50, 100, 25);
 		addFrame.add(courseNumberLabel);
 
@@ -348,9 +410,9 @@ public class StudentPage extends JFrame implements ActionListener {
 	public static void removeText(String username, String courseNumber){
 		try{
 			// PrintWriter object for output.txt
-			PrintWriter pw = new PrintWriter("output.txt");
-			File file = new File(username + ".txt");
-			String tempFileName = username + ".txt";
+			PrintWriter pw = new PrintWriter("SJSUCoursePlanner/StudentCourses/output.txt");
+			File file = new File("SJSUCoursePlanner/StudentCourses/" + username + ".txt");
+			String tempFileName = "SJSUCoursePlanner/StudentCourses/" + username + ".txt";
 						  
 			// BufferedReader object for input.txt
 			BufferedReader br1 = new BufferedReader(new FileReader(tempFileName));
@@ -386,7 +448,7 @@ public class StudentPage extends JFrame implements ActionListener {
 			pw.close();
 
 			file.delete();
-			File newFile = new File("output.txt");
+			File newFile = new File("/SJSUCoursePlanner/StudentCourses/output.txt");
 			newFile.renameTo(file);
 			System.out.println("File operation performed successfully");
 		}
@@ -416,8 +478,27 @@ public class StudentPage extends JFrame implements ActionListener {
 		return this.username;
 	}
 
+	private static class HeaderRenderer implements TableCellRenderer {
+
+		DefaultTableCellRenderer renderer;
+	
+		public HeaderRenderer(JTable table) {
+			renderer = (DefaultTableCellRenderer)
+				table.getTableHeader().getDefaultRenderer();
+			renderer.setHorizontalAlignment(JLabel.CENTER);
+		}
+	
+		@Override
+		public Component getTableCellRendererComponent(
+			JTable table, Object value, boolean isSelected,
+			boolean hasFocus, int row, int col) {
+			return renderer.getTableCellRendererComponent(
+				table, value, isSelected, hasFocus, row, col);
+		}
+	}
+
 	public static void main(String[] args) {
-		new StudentPage(null, false);
+		new StudentPage("SS-1570", false, null);
 	}
 
 }

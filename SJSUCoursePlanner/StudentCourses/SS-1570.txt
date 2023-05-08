@@ -1,0 +1,2 @@
+CS 146,Data Stuctures,3
+CS 151,Object Oriented Design,3

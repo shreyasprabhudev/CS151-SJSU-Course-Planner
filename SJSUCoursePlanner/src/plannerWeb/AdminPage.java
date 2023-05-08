@@ -24,7 +24,7 @@ public class AdminPage extends JFrame implements ActionListener {
 	JButton adminLogoutBtn;
 	JLabel adminWelcomeLabel;
 
-	public AdminPage() {
+	public AdminPage(String username) {
 
 		this.setSize(1400, 800);
 		this.setLayout(null);
@@ -55,7 +55,7 @@ public class AdminPage extends JFrame implements ActionListener {
 		});
 		this.add(adminLogoutBtn);
 
-		adminWelcomeLabel = new JLabel("Welcome Admin!");
+		adminWelcomeLabel = new JLabel("Welcome " + username + "!");
 		adminWelcomeLabel.setHorizontalAlignment(JLabel.CENTER);
 		adminWelcomeLabel.setFont(new Font("Serif", Font.BOLD, 50));
 		adminWelcomeLabel.setBounds(90, 80, 400, 80);
@@ -90,7 +90,7 @@ public class AdminPage extends JFrame implements ActionListener {
 
 				// read the course data from a file and display it in the text area
 				try {
-					File courseFile = new File("EntireCoursesAdmin.txt");
+					File courseFile = new File("/SJSUCoursePlanner/Majors/EntireCoursesAdmin.txt");
 					Scanner scanner = new Scanner(courseFile);
 					while (scanner.hasNextLine()) {
 						String line = scanner.nextLine();
@@ -184,7 +184,7 @@ public class AdminPage extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		new AdminPage();
+		new AdminPage(null);
 	}
 
 }

@@ -24,6 +24,7 @@ public class Planner{
 
 	public static void main(String[] args) {
 		homepage();
+		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 	}
 
 	public static void homepage() {
@@ -60,7 +61,7 @@ public class Planner{
 		int buttonY = frame.getHeight() * 3 / 4 - buttonHeight / 2;
 		signUpButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
 
-		ImageIcon imageIcon = new ImageIcon("./homeicon/sjsu1.jpeg");
+		ImageIcon imageIcon = new ImageIcon("SJSUCoursePlanner/homeicon/sjsu1.jpeg");
 		Image image = imageIcon.getImage();
 
 		// Create a new ImageIcon from the original image
@@ -143,7 +144,7 @@ public class Planner{
 			}
 		});
 
-		adminButton = new JButton("I'm admin");
+		adminButton = new JButton("I'm an admin");
 		int pbuttonWidth = 200;
 		int pbuttonHeight = 50;
 		int pbuttonX = (frame.getWidth() - pbuttonWidth) / 2; // adjusted buttonX value
@@ -208,20 +209,10 @@ public class Planner{
 		pageTitle.setVerticalAlignment(JLabel.CENTER);
 		pageTitle.setHorizontalAlignment(JLabel.CENTER);
 
-		signUpButton = new JButton("Sign Up");
 		int buttonWidth = 200;
 		int buttonHeight = 50;
 		int buttonX = (frame.getWidth() - buttonWidth) / 2 + 120; // adjusted buttonX value
 		int buttonY = frame.getHeight() * 3 / 4 - buttonHeight / 2;
-		signUpButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
-		signUpButton.setFont(new Font("Arial", Font.PLAIN, 25));
-		signUpButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panel.removeAll();
-				panel.updateUI();
-				registerScreen();
-			}
-		});
 
 		userLabel = new JLabel("Username");
 		userLabel.setBounds(frame.getWidth() / 2 - 150, frame.getHeight() / 2 - 100, 300, 40);
@@ -244,8 +235,8 @@ public class Planner{
 		passwordText.setHorizontalAlignment(JTextField.CENTER);
 
 		loginButton = new JButton("Login");
-		buttonX = buttonX - buttonWidth - 50;
-		loginButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
+		buttonX = buttonX - buttonWidth + 80;
+		loginButton.setBounds(buttonX, buttonY + 40, buttonWidth, buttonHeight);
 		loginButton.setFont(new Font("Arial", Font.PLAIN, 25));
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -261,9 +252,9 @@ public class Planner{
 					String[] fields = getUser(username, password).split(" ");
 
 					if (username.substring(0, 2).equals("SS"))
-						new StudentPage(username, false);
+						new StudentPage(username, false, null);
 					else if (username.substring(0, 2).equals("UA"))
-						new AdminPage();
+						new AdminPage(username);
 					else if(username.substring(0, 2).equals("SA"))
 						new AdvisorPage();
 				}
@@ -292,7 +283,6 @@ public class Planner{
 		panel.add(passwordLabel);
 		panel.add(userLabel);
 		panel.add(passwordText);
-		panel.add(signUpButton);
 		panel.add(pageTitle);
 
 		frame.setVisible(true);
@@ -400,10 +390,10 @@ public class Planner{
 					
 					if (username.substring(0, 2).equals("SS")){
 						createStudentFile(username);
-						new StudentPage(username, false);
+						new StudentPage(username, false, null);
 					}
 					else if (username.substring(0, 2).equals("UA"))
-						new AdminPage();
+						new AdminPage(username);
 					else if (username.substring(0, 2).equals("SA"))
 						new AdvisorPage();
 					
@@ -423,7 +413,7 @@ public class Planner{
 
 	public static void readFile() {
 		try {
-			File file = new File("userData.txt");
+			File file = new File("SJSUCoursePlanner/userData.txt");
 			Scanner myReader = new Scanner(file);
 			while (myReader.hasNextLine()) {
 				String data = myReader.nextLine();
@@ -438,7 +428,7 @@ public class Planner{
 
 	public static void writeFile(String username, String password, String firstName, String lastName, String email) {
 		try {
-			File file = new File("userData.txt");
+			File file = new File("SJSUCoursePlanner/userData.txt");
 			if (file.createNewFile()) {
 				System.out.println("File created: " + file.getName());
 			} else {
@@ -450,7 +440,7 @@ public class Planner{
 		}
 
 		try {
-			FileWriter writer = new FileWriter("userData.txt", true);
+			FileWriter writer = new FileWriter("SJSUCoursePlanner/userData.txt", true);
 			writer.write(username + " " + password + " " + firstName + " " + lastName + " " + email);
 			writer.write(System.getProperty("line.separator"));
 			writer.close();
@@ -463,7 +453,7 @@ public class Planner{
 
 	public static void createStudentFile(String username) {
 		try {
-			File file = new File(username + ".txt");
+			File file = new File("SJSUCoursePlanner/StudentCourses/" + username + ".txt");
 			if (file.createNewFile()) {
 				System.out.println("File created: " + file.getName());
 			} else {
