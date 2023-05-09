@@ -117,7 +117,7 @@ public class StudentPage extends JFrame implements ActionListener {
 			studentWelcomeLabel = new JLabel("Welcome Advisor! Currently Viewing " + username);
 			studentWelcomeLabel.setBounds(275, 80, 1000, 80);
 			studentWelcomeLabel.setFont(new Font("Serif", Font.BOLD, 40));
-			JButton returnToAdminButton = new JButton("Return to Admin");
+			JButton returnToAdminButton = new JButton("Return to Advisor");
 			returnToAdminButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
@@ -273,10 +273,13 @@ public class StudentPage extends JFrame implements ActionListener {
 		}
 	}
 
-	private static void viewCourses(String username) {
+	public static void viewCourses(String username) {
 		try {
 			// Open the text file containing the courses
-			FileReader fileReader = new FileReader("SJSUCoursePlanner/StudentCourses/" + username + ".txt");
+			File file = new File("SJSUCoursePlanner/StudentCourses/" + username + ".txt");
+			file.renameTo(new File(username + ".txt"));
+			file = new File(username + ".txt");
+			FileReader fileReader = new FileReader(username + ".txt");
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
 			JFrame addFrame = new JFrame("View Courses");
@@ -289,7 +292,7 @@ public class StudentPage extends JFrame implements ActionListener {
 			// Read each line of the file and add it to a list of classes
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
-				if(!line.contains(" ")){
+				if(!(line == null)){
 					String[] courseInfo = line.split(",");
 					data.add(courseInfo);
 				}
@@ -313,8 +316,10 @@ public class StudentPage extends JFrame implements ActionListener {
 
 			JTable studentTable = new JTable(arr_data, column) {
 				public boolean editCellAt(int row, int column, java.util.EventObject e) {
+					System.out.println("here");
 					return false;
 				}
+				
 			};
 			DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) studentTable
 					.getDefaultRenderer(Object.class);
@@ -333,17 +338,18 @@ public class StudentPage extends JFrame implements ActionListener {
 					JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 			addFrame.getContentPane().add(sp);
 
+			file.renameTo(new File("SJSUCoursePlanner/StudentCourses/" + username + ".txt"));
+
 			addFrame.setVisible(true);
 
-			/*
-			 * JList<String> classList = new JList<>(classes.toArray(new String[0]));
-			 * JScrollPane scrollPane = new JScrollPane(classList);
-			 * JOptionPane.showMessageDialog(null, scrollPane, "Classes for " + major,
-			 * JOptionPane.PLAIN_MESSAGE);
-			 * 
-			 */
+			/* 
+			JList<String> classList = new JList<>(classes.toArray(new String[0]));
+			JScrollPane scrollPane = new JScrollPane(classList);
+			JOptionPane.showMessageDialog(null, scrollPane, "Classes for " + major, JOptionPane.PLAIN_MESSAGE);
+			*/
+			 
 		} catch (IOException e) {
-			// Handle the exception (e.g. display an error message)
+			System.out.println("error with adding course");
 		}
 	}
 
