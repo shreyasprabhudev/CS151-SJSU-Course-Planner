@@ -94,14 +94,14 @@ Home Page - What is shown immediately when running the program
 Select User Screen upon choosing Sign Up
 ![Screenshot (231)](https://user-images.githubusercontent.com/114033045/236167121-1072f867-0b0a-48e4-aa83-b5c42cf3c2fd.png)
 
-Student Page with Classes showing for Major chosen
-![Screenshot (236)](https://user-images.githubusercontent.com/114033045/236167290-53282b34-7f7e-40aa-8b42-572481bbb438.png)
+Student Page with Major classes showing
+<img width="1392" alt="Screenshot_2023-05-09_at_1 25 29_AM" src="https://user-images.githubusercontent.com/114033045/237039477-033ee1be-d351-4b6a-a8d6-325a802c0388.png">
 
-Admin Page with Add User showing
-![Screenshot (240)](https://user-images.githubusercontent.com/114033045/236168709-dfd3e849-ddbb-4e00-8c00-2e6f519c2128.png)
+Admin Page 
+<img width="1398" alt="Screenshot_2023-05-09_at_1 17 21_AM" src="https://user-images.githubusercontent.com/114033045/237039520-39c48ecb-403a-4979-a4f5-a1fe83aac65a.png">
 
-Advisor page viewing Student Planner
-![image](https://user-images.githubusercontent.com/114033045/236174779-dbf8f9ff-62ba-48c5-9979-9955d66ffbbd.png)
+Advisor page 
+<img width="1399" alt="Screenshot_2023-05-09_at_1 16 15_AM" src="https://user-images.githubusercontent.com/114033045/237039594-fd188c67-0758-4fb5-a53f-b22612349c5c.png">
 
 
 # Other References:
