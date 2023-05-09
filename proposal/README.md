@@ -94,15 +94,16 @@ Home Page - What is shown immediately when running the program
 Select User Screen upon choosing Sign Up
 ![Screenshot (231)](https://user-images.githubusercontent.com/114033045/236167121-1072f867-0b0a-48e4-aa83-b5c42cf3c2fd.png)
 
-Student Page with Major classes showing
-<img width="1392" alt="Screenshot_2023-05-09_at_1 25 29_AM" src="https://user-images.githubusercontent.com/114033045/237039477-033ee1be-d351-4b6a-a8d6-325a802c0388.png">
-
+Student Page 
+<img width="1400" alt="Screenshot_2023-05-09_at_3 14 10_PM" src="https://github.com/shreyasprabhudev/CS151-SJSU-Course-Planner/assets/114033045/94c1851b-15b8-4a31-be1c-036b91abf78f">
 Admin Page 
-<img width="1398" alt="Screenshot_2023-05-09_at_1 17 21_AM" src="https://user-images.githubusercontent.com/114033045/237039520-39c48ecb-403a-4979-a4f5-a1fe83aac65a.png">
+<img width="1398" alt="Screenshot_2023-05-09_at_3 21 20_PM" src="https://github.com/shreyasprabhudev/CS151-SJSU-Course-Planner/assets/114033045/a3f17b31-6b80-480f-b876-edec29312699">
 
-Advisor page 
-<img width="1399" alt="Screenshot_2023-05-09_at_1 16 15_AM" src="https://user-images.githubusercontent.com/114033045/237039594-fd188c67-0758-4fb5-a53f-b22612349c5c.png">
 
+Advisor page viewing Student's page
+<img width="1401" alt="Screenshot_2023-05-09_at_3 17 42_PM" src="https://github.com/shreyasprabhudev/CS151-SJSU-Course-Planner/assets/114033045/3565f08a-a9ea-4bbb-8b65-367de713d703">
+
+<img width="1392" alt="Screenshot_2023-05-09_at_3 30 17_PM" src="https://github.com/shreyasprabhudev/CS151-SJSU-Course-Planner/assets/114033045/d273092b-d6d3-47f8-93a5-f94e6e0a3e03">
 
 # Other References:
 [1] https://1000projects.org/course-planning-project-java.html
