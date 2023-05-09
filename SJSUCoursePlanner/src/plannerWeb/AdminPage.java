@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.lang.ModuleLayer.Controller;
 import java.util.Scanner;
 
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class AdminPage extends JFrame implements ActionListener {
 
@@ -58,12 +60,15 @@ public class AdminPage extends JFrame implements ActionListener {
 		String[] adminOptions = { "Add User", "Remove User", "Add Course", "Remove Course", "View Courses" };
 
 		adminOptionsBox = new JComboBox<String>(adminOptions);
-		adminOptionsBox.setBounds(100, 220, 200, 25);
+		adminOptionsBox.setBounds(620, 250, 200, 60);
+		((JLabel)adminOptionsBox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+		adminOptionsBox.setFont(new Font("Arial", Font.PLAIN, 20));
 		this.add(adminOptionsBox);
 
 		adminOptionConfirmBtn = new JButton("Confirm");
 		adminOptionConfirmBtn.addActionListener(this);
-		adminOptionConfirmBtn.setBounds(210, 350, 90, 25);
+		adminOptionConfirmBtn.setBounds(650, 400, 150, 40);
+		adminOptionConfirmBtn.setFont(new Font("Arial", Font.PLAIN, 20));
 		this.add(adminOptionConfirmBtn);
 
 		adminLogoutBtn = new JButton("Logout");
@@ -98,7 +103,7 @@ public class AdminPage extends JFrame implements ActionListener {
 		adminWelcomeLabel = new JLabel("Welcome Admin, " + username + "!");
 		adminWelcomeLabel.setHorizontalAlignment(JLabel.CENTER);
 		adminWelcomeLabel.setFont(new Font("Serif", Font.BOLD, 50));
-		adminWelcomeLabel.setBounds(90, 80, 600, 80);
+		adminWelcomeLabel.setBounds(400, 80, 600, 80);
 		this.add(adminWelcomeLabel);
 
 		this.setVisible(true);
@@ -202,7 +207,11 @@ public class AdminPage extends JFrame implements ActionListener {
 			String lastName = lastNameField.getText();
 
 			Planner.writeFile(username, password, firstName, lastName, "admin_generated");
+			Planner.createStudentFile(username);
+
+			JOptionPane.showConfirmDialog(null, "User has been sucessfully added!", "Add User", JOptionPane.DEFAULT_OPTION);
 		}
+
 	}
 
 	public void deleteUser() {
@@ -256,6 +265,7 @@ public class AdminPage extends JFrame implements ActionListener {
 				File newFile = new File("output.txt");
 				newFile.renameTo(file);
 				System.out.println("File operation performed successfully");
+				JOptionPane.showConfirmDialog(null, "User has been sucessfully removed!", "Remove User", JOptionPane.DEFAULT_OPTION);
 			}
 			catch(IOException e) {
 				System.out.println("An error occurred.");
@@ -297,7 +307,7 @@ public class AdminPage extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		new AdminPage(null);
+		new AdminPage("SS-1427");
 	}
 
 }

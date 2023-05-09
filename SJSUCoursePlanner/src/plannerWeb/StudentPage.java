@@ -102,12 +102,15 @@ public class StudentPage extends JFrame implements ActionListener {
 
 		String[] studentOpt = { "Add Course", "Remove Course", "View Assigned Advisor", "View Courses" };
 		majorBox = new JComboBox<>(majors);
-		majorBox.setBounds(100, 220, 200, 25);
+		majorBox.setBounds(600, 230, 250, 60);
+		((JLabel)majorBox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+		majorBox.setFont(new Font("Arial", Font.PLAIN, 20));
 		this.add(majorBox);
 
 		majorConfirmBtn = new JButton("Confirm");
 		majorConfirmBtn.addActionListener(this);
-		majorConfirmBtn.setBounds(150, 280, 90, 25);
+		majorConfirmBtn.setBounds(650, 300, 150, 40);
+		majorConfirmBtn.setFont(new Font("Arial", Font.PLAIN, 20));
 		this.add(majorConfirmBtn);
 
 		if (isAdvisor) {
@@ -135,18 +138,21 @@ public class StudentPage extends JFrame implements ActionListener {
 
 		this.add(studentWelcomeLabel);
 
-		major = new JLabel("Select Major");
-		major.setBounds(100, 170, 220, 50);
-		major.setFont(new Font("Serif", Font.PLAIN, 20));
+		major = new JLabel("Select Major to View Required Courses");
+		major.setBounds(530, 170, 500, 50);
+		major.setFont(new Font("Serif", Font.BOLD, 23));
 		this.add(major);
 
 		stuOptBox = new JComboBox<>(studentOpt);
-		stuOptBox.setBounds(100, 400, 200, 25);
+		stuOptBox.setBounds(600, 405, 250, 60);
+		((JLabel)stuOptBox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+		stuOptBox.setFont(new Font("Arial", Font.PLAIN, 20));
 		this.add(stuOptBox);
 
 		stuOptConfirmBtn = new JButton("Confirm");
 		stuOptConfirmBtn.addActionListener(this);
-		stuOptConfirmBtn.setBounds(150, 450, 90, 25);
+		stuOptConfirmBtn.setBounds(650, 475, 150, 40);
+		stuOptConfirmBtn.setFont(new Font("Arial", Font.PLAIN, 20));
 		this.add(stuOptConfirmBtn);
 
 		// new added section for log out
@@ -411,6 +417,8 @@ public class StudentPage extends JFrame implements ActionListener {
 				writeStudentFile(username, courseNumber, courseName, courseUnits);
 
 				addFrame.dispose();
+
+				JOptionPane.showConfirmDialog(null, "Course has been sucessfully added!", "Add Course", JOptionPane.DEFAULT_OPTION);
 			}
 		});
 		addFrame.add(addButton);
@@ -440,8 +448,8 @@ public class StudentPage extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				String courseNumber = courseNumberField.getText();
 				removeText(username, courseNumber);
-
 				removeCourseFrame.dispose();
+				JOptionPane.showConfirmDialog(null, "Course has been sucessfully removed!", "Remove Course", JOptionPane.DEFAULT_OPTION);
 			}
 		});
 		removeCourseFrame.add(addButton);

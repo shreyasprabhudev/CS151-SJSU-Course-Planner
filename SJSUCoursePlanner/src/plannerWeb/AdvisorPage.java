@@ -120,7 +120,7 @@ public class AdvisorPage extends JFrame implements ActionListener {
 
 	public static void main(String[] args) {
 		Planner.readFile();
-		new AdvisorPage(null);
+		new AdvisorPage("SA-1111");
 	}
 
 	@Override
