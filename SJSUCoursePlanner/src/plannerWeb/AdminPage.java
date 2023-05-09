@@ -4,8 +4,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.ModuleLayer.Controller;
 import java.util.Scanner;
 
@@ -113,6 +117,7 @@ public class AdminPage extends JFrame implements ActionListener {
 				selectStudent();
 
 			} else if (((String) adminOptionsBox.getSelectedItem()).equals("Remove Course")) {
+				removeCourseAdmin();
 
 			} else if (((String) adminOptionsBox.getSelectedItem()).equals("View Courses")) {
 				// create a new frame to display the courses
@@ -125,7 +130,7 @@ public class AdminPage extends JFrame implements ActionListener {
 
 				// read the course data from a file and display it in the text area
 				try {
-					File courseFile = new File("/SJSUCoursePlanner/Majors/EntireCoursesAdmin.txt");
+					File courseFile = new File("SJSUCoursePlanner/Majors/EntireCoursesAdmin.txt");
 					Scanner scanner = new Scanner(courseFile);
 					while (scanner.hasNextLine()) {
 						String line = scanner.nextLine();
@@ -145,11 +150,38 @@ public class AdminPage extends JFrame implements ActionListener {
 				courseFrame.setVisible(true);
 			}
 
-		} else
+		} 
+	}
 
-		{
+	public static void removeCourseAdmin(){
+		JFrame addFrame = new JFrame("Select Student");
+		addFrame.setSize(300, 300);
+		addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		addFrame.setLayout(null);
+		addFrame.setLocationRelativeTo(null);
 
-		}
+		JLabel usernameLabel = new JLabel("Enter student username:");
+		usernameLabel.setBounds(75, 90, 200, 25);
+		addFrame.add(usernameLabel);
+
+		JTextField usernameField = new JTextField();
+		usernameField.setBounds(50, 150, 200, 25);
+		addFrame.add(usernameField);
+
+		JButton addButton = new JButton("Select Student");
+		addButton.setBounds(75, 200, 150, 25);
+		addButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String currentUsername = usernameField.getText();
+				addFrame.dispose();
+				StudentPage.removeCourse(currentUsername);
+			}
+		});
+		addFrame.add(addButton);
+
+		addFrame.setVisible(true);
+
 	}
 
 	public void addUser() {
@@ -170,7 +202,6 @@ public class AdminPage extends JFrame implements ActionListener {
 			String lastName = lastNameField.getText();
 
 			Planner.writeFile(username, password, firstName, lastName, "admin_generated");
-
 		}
 	}
 
@@ -183,27 +214,74 @@ public class AdminPage extends JFrame implements ActionListener {
 
 		if (option == JOptionPane.OK_OPTION) {
 			String username = usernameField.getText();
+			try{
+				// PrintWriter object for output.txt
+				PrintWriter pw = new PrintWriter("output.txt");
+				File file = new File("userData.txt");
+							  
+				// BufferedReader object for input.txt
+				BufferedReader br1 = new BufferedReader(new FileReader(file));
+				  
+				String line1 = br1.readLine();
+				String deleted_line = "";
+	
+				try {
+					Scanner myReader = new Scanner(file);
+					while (myReader.hasNextLine()) {
+						String data = myReader.nextLine();
+						String[] partsOfLine = data.split(",");
+						if(partsOfLine[0].equals(username))
+							deleted_line = data;
+					}
+					myReader.close();
+				} catch (FileNotFoundException e) {
+					System.out.println("An error occurred.");
+					e.printStackTrace();
+				}
+	
+				while(line1 != null){
+					if(!line1.equals(deleted_line))
+						pw.println(line1);
+					
+					line1 = br1.readLine(); 
+				}
+				
+				pw.flush();
+				  
+				// closing resources
+				br1.close();
+				pw.close();
+	
+				file.delete();
+				File newFile = new File("output.txt");
+				newFile.renameTo(file);
+				System.out.println("File operation performed successfully");
+			}
+			catch(IOException e) {
+				System.out.println("An error occurred.");
+				e.printStackTrace();
+			}
 
 		}
 	}
 
 	public static void selectStudent() {
 		JFrame addFrame = new JFrame("Select Student");
-		addFrame.setSize(400, 300);
+		addFrame.setSize(300, 300);
 		addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		addFrame.setLayout(null);
 		addFrame.setLocationRelativeTo(null);
 
 		JLabel usernameLabel = new JLabel("Enter student username:");
-		usernameLabel.setBounds(125, 90, 200, 25);
+		usernameLabel.setBounds(75, 90, 200, 25);
 		addFrame.add(usernameLabel);
 
 		JTextField usernameField = new JTextField();
-		usernameField.setBounds(100, 150, 200, 25);
+		usernameField.setBounds(50, 150, 200, 25);
 		addFrame.add(usernameField);
 
 		JButton addButton = new JButton("Select Student");
-		addButton.setBounds(150, 200, 100, 25);
+		addButton.setBounds(75, 200, 150, 25);
 		addButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

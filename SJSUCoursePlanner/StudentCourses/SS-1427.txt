@@ -1,0 +1,5 @@
+s,s,s
+r,r,r
+r,r,r
+s,s,s
+p,p,p

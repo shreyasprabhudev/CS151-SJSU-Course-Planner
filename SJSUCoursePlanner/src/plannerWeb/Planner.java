@@ -327,9 +327,10 @@ public class Planner {
 		JButton button;
 		JLabel pageTitle;
 
-		pageTitle = new JLabel("Sign Up");
-		pageTitle.setBounds(frame.getHeight() / 2 - 75, 150, 800, 40);
-		pageTitle.setFont(new Font("Arial", Font.PLAIN, 35));
+		pageTitle = new JLabel(role + " Sign Up");
+		pageTitle.setBounds(0, 100, frame.getWidth(), 80);
+		pageTitle.setFont(new Font("Palatino", Font.BOLD, 50));
+		pageTitle.setVerticalAlignment(JLabel.CENTER);
 		pageTitle.setHorizontalAlignment(JLabel.CENTER);
 		panel.add(pageTitle);
 

@@ -233,7 +233,7 @@ public class StudentPage extends JFrame implements ActionListener {
 			} else if ((String) stuOptBox.getSelectedItem() == "Remove Course") {
 				removeCourse(this.username);
 			} else if ((String) stuOptBox.getSelectedItem() == "View Courses") {
-				viewCourses(username);
+				viewCourses(this.username);
 			} else if ((String) stuOptBox.getSelectedItem() == "View Assigned Advisor") {
 				assignAdvisors();
 			}
@@ -283,8 +283,10 @@ public class StudentPage extends JFrame implements ActionListener {
 			// Read each line of the file and add it to a list of classes
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
-				String[] courseInfo = line.split(",");
-				data.add(courseInfo);
+				if(!line.contains(" ")){
+					String[] courseInfo = line.split(",");
+					data.add(courseInfo);
+				}
 			}
 
 			String[][] arr_data = new String[data.size()][3];
@@ -416,7 +418,7 @@ public class StudentPage extends JFrame implements ActionListener {
 		addFrame.setVisible(true);
 	}
 
-	private void removeCourse(String username) {
+	public static void removeCourse(String username) {
 		JFrame removeCourseFrame = new JFrame("Remove Course");
 		removeCourseFrame.setSize(400, 300);
 		removeCourseFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -450,12 +452,15 @@ public class StudentPage extends JFrame implements ActionListener {
 	public static void removeText(String username, String courseNumber) {
 		try {
 			// PrintWriter object for output.txt
+			File newFile = new File("SJSUCoursePlanner/StudentCourses/output.txt");
+			newFile.createNewFile();
 			PrintWriter pw = new PrintWriter("SJSUCoursePlanner/StudentCourses/output.txt");
 			File file = new File("SJSUCoursePlanner/StudentCourses/" + username + ".txt");
-			String tempFileName = "SJSUCoursePlanner/StudentCourses/" + username + ".txt";
+			file.renameTo(new File(username + ".txt"));
+			file = new File(username + ".txt");
 
 			// BufferedReader object for input.txt
-			BufferedReader br1 = new BufferedReader(new FileReader(tempFileName));
+			BufferedReader br1 = new BufferedReader(new FileReader(username + ".txt"));
 
 			String line1 = br1.readLine();
 			String deleted_line = "";
@@ -475,11 +480,15 @@ public class StudentPage extends JFrame implements ActionListener {
 			}
 
 			while (line1 != null) {
-				if (!line1.equals(deleted_line))
-					pw.println(line1);
-
+				if (!line1.equals(deleted_line)){
+					pw.write(line1);
+					pw.write(System.getProperty("line.separator"));
+				}
+				
 				line1 = br1.readLine();
 			}
+
+			pw.write(System.getProperty("line.separator"));
 
 			pw.flush();
 
@@ -487,10 +496,10 @@ public class StudentPage extends JFrame implements ActionListener {
 			br1.close();
 			pw.close();
 
-			file.delete();
-			File newFile = new File("/SJSUCoursePlanner/StudentCourses/output.txt");
-			newFile.renameTo(file);
-			System.out.println("File operation performed successfully");
+			if(file.delete()){  
+				System.out.println(file.getName() + " deleted");   //getting and printing the file name  
+			}
+			newFile.renameTo(new File("SJSUCoursePlanner/StudentCourses/" + username + ".txt"));
 		} catch (IOException e) {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
