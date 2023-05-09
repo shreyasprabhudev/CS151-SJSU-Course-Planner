@@ -1,5 +1,6 @@
 package plannerWeb;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.lang.ModuleLayer.Controller;
 import java.util.Scanner;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -30,7 +32,24 @@ public class AdminPage extends JFrame implements ActionListener {
 		this.setLayout(null);
 		this.setTitle("Majors");
 		this.setResizable(false);
+		this.getContentPane().setBackground(Color.GRAY);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		// create a new JLabel to hold the image
+		JLabel imageLabel = new JLabel();
+
+		// load the image from a file (replace "image.jpg" with the name of your image
+		// file)
+		ImageIcon imageIcon = new ImageIcon("SJSUCoursePlanner/homeicon/major.png");
+
+		// set the icon of the JLabel to the loaded image
+		imageLabel.setIcon(imageIcon);
+
+		// set the size and position of the JLabel to center it in the JFrame
+		imageLabel.setBounds(0, 580, 1400, 200);
+
+		// add the JLabel to the JFrame
+		this.add(imageLabel);
 
 		String[] adminOptions = { "Add User", "Remove User", "Add Course", "Remove Course", "View Courses" };
 
@@ -45,7 +64,8 @@ public class AdminPage extends JFrame implements ActionListener {
 
 		adminLogoutBtn = new JButton("Logout");
 		adminLogoutBtn.addActionListener(this);
-		adminLogoutBtn.setBounds(100, 350, 90, 25);
+		adminLogoutBtn.setBounds(1225, 30, 150, 40);
+		adminLogoutBtn.setFont(new Font("Arial", Font.PLAIN, 20));
 		adminLogoutBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -55,10 +75,26 @@ public class AdminPage extends JFrame implements ActionListener {
 		});
 		this.add(adminLogoutBtn);
 
-		adminWelcomeLabel = new JLabel("Welcome " + username + "!");
+		// create a new JLabel to hold the image
+		JLabel adminLogoutLabel = new JLabel();
+
+		// load the image from a file (replace "image.jpg" with the name of your image
+		// file)
+		ImageIcon imageAdminLogoutIcon = new ImageIcon("SJSUCoursePlanner/homeicon/Admin.png");
+
+		// set the icon of the JLabel to the loaded image
+		adminLogoutLabel.setIcon(imageAdminLogoutIcon);
+
+		// set the size and position of the JLabel to center it in the JFrame
+		adminLogoutLabel.setBounds(1130, 310, 300, 280);
+
+		// add the JLabel to the JFrame
+		this.add(adminLogoutLabel);
+
+		adminWelcomeLabel = new JLabel("Welcome Admin, " + username + "!");
 		adminWelcomeLabel.setHorizontalAlignment(JLabel.CENTER);
 		adminWelcomeLabel.setFont(new Font("Serif", Font.BOLD, 50));
-		adminWelcomeLabel.setBounds(90, 80, 400, 80);
+		adminWelcomeLabel.setBounds(90, 80, 600, 80);
 		this.add(adminWelcomeLabel);
 
 		this.setVisible(true);
@@ -77,7 +113,6 @@ public class AdminPage extends JFrame implements ActionListener {
 				selectStudent();
 
 			} else if (((String) adminOptionsBox.getSelectedItem()).equals("Remove Course")) {
-
 
 			} else if (((String) adminOptionsBox.getSelectedItem()).equals("View Courses")) {
 				// create a new frame to display the courses
@@ -152,7 +187,7 @@ public class AdminPage extends JFrame implements ActionListener {
 		}
 	}
 
-	public static void selectStudent(){
+	public static void selectStudent() {
 		JFrame addFrame = new JFrame("Select Student");
 		addFrame.setSize(400, 300);
 		addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

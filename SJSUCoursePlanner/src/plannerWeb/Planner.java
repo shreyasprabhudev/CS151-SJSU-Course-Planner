@@ -16,7 +16,7 @@ import java.util.Scanner;
 import java.awt.Font;
 import java.awt.Image;
 
-public class Planner{
+public class Planner {
 	private static ArrayList<String> users = new ArrayList<>();
 	private static JFrame frame;
 	private static JPanel panel;
@@ -108,7 +108,6 @@ public class Planner{
 		frame.setVisible(true);
 	}
 
-
 	public static void selectUserTypeScreen(boolean isLoggingIn) {
 		JLabel pageTitle;
 		JButton studentButton;
@@ -116,7 +115,7 @@ public class Planner{
 		JButton advisorButton;
 
 		pageTitle = new JLabel();
-		if(isLoggingIn)
+		if (isLoggingIn)
 			pageTitle.setText("Welcome Back!");
 		else
 			pageTitle.setText("Welcome to the SJSU Planner!");
@@ -137,7 +136,7 @@ public class Planner{
 				panel.removeAll();
 				panel.updateUI();
 				role = "Student";
-				if(isLoggingIn)
+				if (isLoggingIn)
 					welcomeScreen();
 				else
 					registerScreen();
@@ -156,7 +155,7 @@ public class Planner{
 				panel.removeAll();
 				panel.updateUI();
 				role = "Admin";
-				if(isLoggingIn)
+				if (isLoggingIn)
 					welcomeScreen();
 				else
 					registerScreen();
@@ -175,7 +174,7 @@ public class Planner{
 				panel.removeAll();
 				panel.updateUI();
 				role = "Advisor";
-				if(isLoggingIn)
+				if (isLoggingIn)
 					welcomeScreen();
 				else
 					registerScreen();
@@ -255,18 +254,16 @@ public class Planner{
 						new StudentPage(username, false, null);
 					else if (username.substring(0, 2).equals("UA"))
 						new AdminPage(username);
-					else if(username.substring(0, 2).equals("SA"))
+					else if (username.substring(0, 2).equals("SA"))
 						new AdvisorPage(username);
-				}
-				else if (output.equals("User does not exist")) {
+				} else if (output.equals("User does not exist")) {
 					JOptionPane.showMessageDialog(frame,
 							new Exception("This is not a valid username! Please sign up first!"), "Error Logging In!",
 							JOptionPane.ERROR_MESSAGE);
 					panel.removeAll();
 					panel.updateUI();
 					welcomeScreen();
-				} 
-				else if (output.equals("Wrong password")) {
+				} else if (output.equals("Wrong password")) {
 					JOptionPane.showMessageDialog(frame, new PasswordException("Username and password do not match!"),
 							"Password Error!", JOptionPane.ERROR_MESSAGE);
 					panel.removeAll();
@@ -296,12 +293,12 @@ public class Planner{
 			public void actionPerformed(ActionEvent e) {
 				panel.removeAll();
 				panel.updateUI();
-				if(screen.equals("selectRole"))
-					if(isLoggingIn)
+				if (screen.equals("selectRole"))
+					if (isLoggingIn)
 						selectUserTypeScreen(true);
 					else
 						selectUserTypeScreen(false);
-				else if(screen.equals("homepage"))
+				else if (screen.equals("homepage"))
 					homepage();
 			}
 		});
@@ -388,16 +385,15 @@ public class Planner{
 					frame.dispose();
 
 					writeFile(username, password, firstNameText.getText(), lastNameText.getText(), emailText.getText());
-					
-					if (username.substring(0, 2).equals("SS")){
+
+					if (username.substring(0, 2).equals("SS")) {
 						createStudentFile(username);
 						new StudentPage(username, false, null);
-					}
-					else if (username.substring(0, 2).equals("UA"))
+					} else if (username.substring(0, 2).equals("UA"))
 						new AdminPage(username);
 					else if (username.substring(0, 2).equals("SA"))
 						new AdvisorPage(username);
-					
+
 					frame = null;
 				} catch (PasswordException p) {
 					JOptionPane.showMessageDialog(frame, p, "Password Error!", JOptionPane.ERROR_MESSAGE);
@@ -551,7 +547,7 @@ public class Planner{
 			throw new Minimum8CharactersRequired();
 	}
 
-	public static ArrayList<String> getUsers(){
+	public static ArrayList<String> getUsers() {
 		return users;
 	}
 
