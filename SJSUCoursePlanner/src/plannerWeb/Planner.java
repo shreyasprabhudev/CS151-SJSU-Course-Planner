@@ -247,7 +247,7 @@ public class Planner{
 				String output = checkUser(username, password);
 				if (output.equals("Valid user")) {
 					frame.removeAll();
-					frame.setVisible(false);
+					frame.dispose();
 
 					String[] fields = getUser(username, password).split(" ");
 
@@ -256,7 +256,7 @@ public class Planner{
 					else if (username.substring(0, 2).equals("UA"))
 						new AdminPage(username);
 					else if(username.substring(0, 2).equals("SA"))
-						new AdvisorPage();
+						new AdvisorPage(username);
 				}
 				else if (output.equals("User does not exist")) {
 					JOptionPane.showMessageDialog(frame,
@@ -385,6 +385,7 @@ public class Planner{
 					validatePassword(password);
 					panel.removeAll();
 					panel.updateUI();
+					frame.dispose();
 
 					writeFile(username, password, firstNameText.getText(), lastNameText.getText(), emailText.getText());
 					
@@ -395,7 +396,7 @@ public class Planner{
 					else if (username.substring(0, 2).equals("UA"))
 						new AdminPage(username);
 					else if (username.substring(0, 2).equals("SA"))
-						new AdvisorPage();
+						new AdvisorPage(username);
 					
 					frame = null;
 				} catch (PasswordException p) {

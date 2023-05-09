@@ -66,7 +66,7 @@ public class StudentPage extends JFrame implements ActionListener {
 
 	String username;
 
-	public StudentPage(String username, boolean isAdvisor, String adminUsername) {
+	public StudentPage(String username, boolean isAdvisor, String advisorUsername) {
 		
 		this.username = username;
 
@@ -93,24 +93,29 @@ public class StudentPage extends JFrame implements ActionListener {
 
 		if(isAdvisor){
 			studentWelcomeLabel = new JLabel("Welcome Advisor! Currently Viewing " + username);
+			studentWelcomeLabel.setBounds(275, 80, 1000, 80);
+			studentWelcomeLabel.setFont(new Font("Serif", Font.BOLD, 40));
 			JButton returnToAdminButton = new JButton("Return to Admin");
 			returnToAdminButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					dispose();
-					new AdminPage(adminUsername);
+					new AdvisorPage(advisorUsername);
 				}
 			});
-			returnToAdminButton.setBounds(1000, 20, 150, 30);
+			returnToAdminButton.setBounds(50, 30, 200, 40);
+			returnToAdminButton.setFont(new Font("Arial", Font.PLAIN, 20));
 			add(returnToAdminButton);
 		}
 		else{
 			studentWelcomeLabel = new JLabel("Welcome " + username + "!");
+			studentWelcomeLabel.setBounds(500, 80, 450, 80);
+			studentWelcomeLabel.setFont(new Font("Serif", Font.BOLD, 50));
 		}
 		
 		studentWelcomeLabel.setHorizontalAlignment(JLabel.CENTER);
-		studentWelcomeLabel.setFont(new Font("Serif", Font.BOLD, 50));
-		studentWelcomeLabel.setBounds(500, 80, 450, 80);
+		
+
 		this.add(studentWelcomeLabel);
 
 		major = new JLabel("Select Major");
@@ -136,7 +141,8 @@ public class StudentPage extends JFrame implements ActionListener {
 				Planner.homepage();
 			}
 		});
-		logoutButton.setBounds(1200, 20, 150, 30);
+		logoutButton.setBounds(1225, 30, 150, 40);
+		logoutButton.setFont(new Font("Arial", Font.PLAIN, 20));
 		add(logoutButton);
 
 		this.setVisible(true);

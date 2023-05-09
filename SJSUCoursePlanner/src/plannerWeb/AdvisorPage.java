@@ -17,7 +17,7 @@ public class AdvisorPage extends JFrame implements ActionListener {
 	JButton advisorLogoutBtn;
 	JLabel advisorWelcomeLabel;
 
-	public AdvisorPage() {
+	public AdvisorPage(String adminUsername) {
 		this.setSize(1400, 800);
 		this.setLayout(null);
 		this.setTitle("Advisor Page");
@@ -34,8 +34,10 @@ public class AdvisorPage extends JFrame implements ActionListener {
 		advisorOptionConfirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for(String username : advisorOptions){
-					if(((String) advisorOptionsBox.getSelectedItem() == username))
-						new StudentPage(username, true, null);
+					if(((String) advisorOptionsBox.getSelectedItem() == username)){
+						dispose();
+						new StudentPage(username, true, adminUsername);
+					}
 				}
 				
 			}
@@ -84,7 +86,7 @@ public class AdvisorPage extends JFrame implements ActionListener {
 
 	public static void main(String[] args) {
 		Planner.readFile();
-		new AdvisorPage();
+		new AdvisorPage(null);
 	}
 
 	@Override
