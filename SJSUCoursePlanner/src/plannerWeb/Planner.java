@@ -11,8 +11,18 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.Stack;
+import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.awt.Font;
 import java.awt.Image;
 
@@ -438,7 +448,7 @@ public class Planner {
 
 		try {
 			FileWriter writer = new FileWriter("SJSUCoursePlanner/userData.txt", true);
-			writer.write(username + " " + password + " " + firstName + " " + lastName + " " + email);
+			writer.write(username + " " + encryptPassword(password) + " " + firstName + " " + lastName + " " + email);
 			writer.write(System.getProperty("line.separator"));
 			writer.close();
 			System.out.println("Successfully wrote to the file.");
@@ -446,6 +456,56 @@ public class Planner {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
 		}
+	}
+
+	public static String encryptPassword(String password){
+		String new_password = "";
+		Queue<String> queue = new LinkedList<>();
+
+		for(int i = 0; i < password.length(); i++)
+			queue.add(password.substring(i, i+1));
+
+		Set<Integer> positions = Stream.of(0, 1, 3, 4, 6, 7, 8, 10, 12, 14, 15, 17, 19, 21, 23, 24, 27, 29, 33, 36, 38, 42, 47).collect(Collectors.toSet());
+		String randomString = UUID.randomUUID().toString().replaceAll("-", "");
+		
+		for(int i = 0; i < 50; i++){
+			if(positions.contains(i))
+				new_password += randomString.substring(i, i + 1);
+			else{
+				try{
+					new_password += queue.remove();
+				}
+				catch(Exception e){
+					System.out.println("failed in adding from queue");
+				}
+			}
+				
+		}
+
+		return new_password;
+	}
+
+	public static String decryptPassword(String entered_password, String stored_password){
+		Set<Integer> positions = Stream.of(0, 1, 3, 4, 6, 7, 8, 10, 12, 14, 15, 17, 19, 21, 23, 24, 27, 29, 33, 36, 38, 42, 47).collect(Collectors.toSet());
+		Queue<String> queue = new LinkedList<>();
+
+		for(int i = 0; i < entered_password.length(); i++)
+			queue.add(entered_password.substring(i, i+1));
+
+		String password = "";
+		for(int i = 0; i < 50; i++){
+			if(!positions.contains(i)){
+				try{
+					if(stored_password.substring(i, i+1).equals(queue.peek())){
+						password += queue.remove();
+					}
+				}
+				catch(Exception e){
+					System.out.println("failed to add to password");
+				}
+			}
+		}
+		return password;
 	}
 
 	public static void createStudentFile(String username) {
@@ -487,6 +547,7 @@ public class Planner {
 			String[] fields = currentLine.split(" ");
 			String currentUsername = fields[0];
 			String currentPassword = fields[1];
+			currentPassword = decryptPassword(password, currentPassword);
 
 			if (username.equals(currentUsername))
 				userExists = true;

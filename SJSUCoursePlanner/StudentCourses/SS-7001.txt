@@ -1,3 +1,0 @@
-SS-7001,CS-151,OOD,3
-SS-7001,CS-151,OOD,3
-CS-146,Data Structure,3
