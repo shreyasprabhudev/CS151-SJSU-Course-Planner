@@ -470,7 +470,12 @@ public class Planner {
 		
 		for(int i = 0; i < 50; i++){
 			if(positions.contains(i))
-				new_password += randomString.substring(i, i + 1);
+				try{
+					new_password += randomString.substring(i, i + 1);
+				}
+				catch(Exception e){
+					System.out.println("failed in adding from queue");
+				}
 			else{
 				try{
 					new_password += queue.remove();
