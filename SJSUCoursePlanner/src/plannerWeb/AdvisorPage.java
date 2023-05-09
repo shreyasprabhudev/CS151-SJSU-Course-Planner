@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class AdvisorPage extends JFrame implements ActionListener {
 
@@ -46,28 +47,31 @@ public class AdvisorPage extends JFrame implements ActionListener {
 		String[] advisorOptions = getUsernames(Planner.getUsers());
 
 		advisorOptionsBox = new JComboBox<String>(advisorOptions);
-		advisorOptionsBox.setBounds(100, 220, 200, 25);
+		advisorOptionsBox.setBounds(600, 300, 250, 60);
+		((JLabel)advisorOptionsBox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+		advisorOptionsBox.setFont(new Font("Arial", Font.PLAIN, 20));
 		this.add(advisorOptionsBox);
 
 		advisorOptionConfirmBtn = new JButton("Confirm");
+		advisorOptionConfirmBtn.setBounds(650, 375, 150, 40);
+		advisorOptionConfirmBtn.setFont(new Font("Arial", Font.PLAIN, 20));
 		advisorOptionConfirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for (String username : advisorOptions) {
 					if (((String) advisorOptionsBox.getSelectedItem() == username)) {
-						dispose();
 						new StudentPage(username, true, adminUsername);
+						dispose();
 					}
 				}
 
 			}
 		});
-		advisorOptionConfirmBtn.setBounds(210, 350, 90, 25);
 		this.add(advisorOptionConfirmBtn);
 
 		advisorWelcomeLabel = new JLabel("Welcome Advisor!");
 		advisorWelcomeLabel.setHorizontalAlignment(JLabel.CENTER);
 		advisorWelcomeLabel.setFont(new Font("Serif", Font.BOLD, 50));
-		advisorWelcomeLabel.setBounds(90, 80, 400, 80);
+		advisorWelcomeLabel.setBounds(515, 80, 400, 80);
 		this.add(advisorWelcomeLabel);
 
 		// new added section for log out
@@ -75,8 +79,8 @@ public class AdvisorPage extends JFrame implements ActionListener {
 		advisorLogoutBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				dispose();
 				Planner.homepage();
+				dispose();
 			}
 		});
 		advisorLogoutBtn.setBounds(1225, 30, 150, 40);

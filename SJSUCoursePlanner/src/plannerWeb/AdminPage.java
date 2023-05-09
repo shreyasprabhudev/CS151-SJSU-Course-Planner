@@ -78,8 +78,8 @@ public class AdminPage extends JFrame implements ActionListener {
 		adminLogoutBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				dispose();
 				Planner.homepage();
+				dispose();
 			}
 		});
 		this.add(adminLogoutBtn);

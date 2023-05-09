@@ -121,8 +121,8 @@ public class StudentPage extends JFrame implements ActionListener {
 			returnToAdminButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
-					dispose();
 					new AdvisorPage(advisorUsername);
+					dispose();
 				}
 			});
 			returnToAdminButton.setBounds(50, 30, 200, 40);
@@ -160,8 +160,8 @@ public class StudentPage extends JFrame implements ActionListener {
 		logoutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				dispose();
 				Planner.homepage();
+				dispose();
 			}
 		});
 		logoutButton.setBounds(1225, 30, 150, 40);
