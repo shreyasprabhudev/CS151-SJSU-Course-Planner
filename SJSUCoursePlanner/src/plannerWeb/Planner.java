@@ -11,12 +11,22 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.Stack;
+import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.awt.Font;
 import java.awt.Image;
 
-public class Planner{
+public class Planner {
 	private static ArrayList<String> users = new ArrayList<>();
 	private static JFrame frame;
 	private static JPanel panel;
@@ -24,6 +34,7 @@ public class Planner{
 
 	public static void main(String[] args) {
 		homepage();
+		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 	}
 
 	public static void homepage() {
@@ -60,7 +71,7 @@ public class Planner{
 		int buttonY = frame.getHeight() * 3 / 4 - buttonHeight / 2;
 		signUpButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
 
-		ImageIcon imageIcon = new ImageIcon("./homeicon/sjsu1.jpeg");
+		ImageIcon imageIcon = new ImageIcon("SJSUCoursePlanner/homeicon/sjsu1.jpeg");
 		Image image = imageIcon.getImage();
 
 		// Create a new ImageIcon from the original image
@@ -107,7 +118,6 @@ public class Planner{
 		frame.setVisible(true);
 	}
 
-
 	public static void selectUserTypeScreen(boolean isLoggingIn) {
 		JLabel pageTitle;
 		JButton studentButton;
@@ -115,7 +125,7 @@ public class Planner{
 		JButton advisorButton;
 
 		pageTitle = new JLabel();
-		if(isLoggingIn)
+		if (isLoggingIn)
 			pageTitle.setText("Welcome Back!");
 		else
 			pageTitle.setText("Welcome to the SJSU Planner!");
@@ -136,14 +146,14 @@ public class Planner{
 				panel.removeAll();
 				panel.updateUI();
 				role = "Student";
-				if(isLoggingIn)
+				if (isLoggingIn)
 					welcomeScreen();
 				else
 					registerScreen();
 			}
 		});
 
-		adminButton = new JButton("I'm admin");
+		adminButton = new JButton("I'm an admin");
 		int pbuttonWidth = 200;
 		int pbuttonHeight = 50;
 		int pbuttonX = (frame.getWidth() - pbuttonWidth) / 2; // adjusted buttonX value
@@ -155,7 +165,7 @@ public class Planner{
 				panel.removeAll();
 				panel.updateUI();
 				role = "Admin";
-				if(isLoggingIn)
+				if (isLoggingIn)
 					welcomeScreen();
 				else
 					registerScreen();
@@ -174,7 +184,7 @@ public class Planner{
 				panel.removeAll();
 				panel.updateUI();
 				role = "Advisor";
-				if(isLoggingIn)
+				if (isLoggingIn)
 					welcomeScreen();
 				else
 					registerScreen();
@@ -208,20 +218,10 @@ public class Planner{
 		pageTitle.setVerticalAlignment(JLabel.CENTER);
 		pageTitle.setHorizontalAlignment(JLabel.CENTER);
 
-		signUpButton = new JButton("Sign Up");
 		int buttonWidth = 200;
 		int buttonHeight = 50;
 		int buttonX = (frame.getWidth() - buttonWidth) / 2 + 120; // adjusted buttonX value
 		int buttonY = frame.getHeight() * 3 / 4 - buttonHeight / 2;
-		signUpButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
-		signUpButton.setFont(new Font("Arial", Font.PLAIN, 25));
-		signUpButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panel.removeAll();
-				panel.updateUI();
-				registerScreen();
-			}
-		});
 
 		userLabel = new JLabel("Username");
 		userLabel.setBounds(frame.getWidth() / 2 - 150, frame.getHeight() / 2 - 100, 300, 40);
@@ -244,8 +244,8 @@ public class Planner{
 		passwordText.setHorizontalAlignment(JTextField.CENTER);
 
 		loginButton = new JButton("Login");
-		buttonX = buttonX - buttonWidth - 50;
-		loginButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
+		buttonX = buttonX - buttonWidth + 80;
+		loginButton.setBounds(buttonX, buttonY + 40, buttonWidth, buttonHeight);
 		loginButton.setFont(new Font("Arial", Font.PLAIN, 25));
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -256,26 +256,24 @@ public class Planner{
 				String output = checkUser(username, password);
 				if (output.equals("Valid user")) {
 					frame.removeAll();
-					frame.setVisible(false);
+					frame.dispose();
 
 					String[] fields = getUser(username, password).split(" ");
 
 					if (username.substring(0, 2).equals("SS"))
-						new StudentPage(username, false);
+						new StudentPage(username, false, null);
 					else if (username.substring(0, 2).equals("UA"))
-						new AdminPage();
-					else if(username.substring(0, 2).equals("SA"))
-						new AdvisorPage();
-				}
-				else if (output.equals("User does not exist")) {
+						new AdminPage(username);
+					else if (username.substring(0, 2).equals("SA"))
+						new AdvisorPage(username);
+				} else if (output.equals("User does not exist")) {
 					JOptionPane.showMessageDialog(frame,
 							new Exception("This is not a valid username! Please sign up first!"), "Error Logging In!",
 							JOptionPane.ERROR_MESSAGE);
 					panel.removeAll();
 					panel.updateUI();
 					welcomeScreen();
-				} 
-				else if (output.equals("Wrong password")) {
+				} else if (output.equals("Wrong password")) {
 					JOptionPane.showMessageDialog(frame, new PasswordException("Username and password do not match!"),
 							"Password Error!", JOptionPane.ERROR_MESSAGE);
 					panel.removeAll();
@@ -292,7 +290,6 @@ public class Planner{
 		panel.add(passwordLabel);
 		panel.add(userLabel);
 		panel.add(passwordText);
-		panel.add(signUpButton);
 		panel.add(pageTitle);
 
 		frame.setVisible(true);
@@ -306,12 +303,12 @@ public class Planner{
 			public void actionPerformed(ActionEvent e) {
 				panel.removeAll();
 				panel.updateUI();
-				if(screen.equals("selectRole"))
-					if(isLoggingIn)
+				if (screen.equals("selectRole"))
+					if (isLoggingIn)
 						selectUserTypeScreen(true);
 					else
 						selectUserTypeScreen(false);
-				else if(screen.equals("homepage"))
+				else if (screen.equals("homepage"))
 					homepage();
 			}
 		});
@@ -330,9 +327,10 @@ public class Planner{
 		JButton button;
 		JLabel pageTitle;
 
-		pageTitle = new JLabel("Sign Up");
-		pageTitle.setBounds(frame.getHeight() / 2 - 75, 150, 800, 40);
-		pageTitle.setFont(new Font("Arial", Font.PLAIN, 35));
+		pageTitle = new JLabel(role + " Sign Up");
+		pageTitle.setBounds(0, 100, frame.getWidth(), 80);
+		pageTitle.setFont(new Font("Palatino", Font.BOLD, 50));
+		pageTitle.setVerticalAlignment(JLabel.CENTER);
 		pageTitle.setHorizontalAlignment(JLabel.CENTER);
 		panel.add(pageTitle);
 
@@ -395,18 +393,18 @@ public class Planner{
 					validatePassword(password);
 					panel.removeAll();
 					panel.updateUI();
+					frame.dispose();
 
 					writeFile(username, password, firstNameText.getText(), lastNameText.getText(), emailText.getText());
-					
-					if (username.substring(0, 2).equals("SS")){
+
+					if (username.substring(0, 2).equals("SS")) {
 						createStudentFile(username);
-						new StudentPage(username, false);
-					}
-					else if (username.substring(0, 2).equals("UA"))
-						new AdminPage();
+						new StudentPage(username, false, null);
+					} else if (username.substring(0, 2).equals("UA"))
+						new AdminPage(username);
 					else if (username.substring(0, 2).equals("SA"))
-						new AdvisorPage();
-					
+						new AdvisorPage(username);
+
 					frame = null;
 				} catch (PasswordException p) {
 					JOptionPane.showMessageDialog(frame, p, "Password Error!", JOptionPane.ERROR_MESSAGE);
@@ -423,7 +421,7 @@ public class Planner{
 
 	public static void readFile() {
 		try {
-			File file = new File("userData.txt");
+			File file = new File("SJSUCoursePlanner/userData.txt");
 			Scanner myReader = new Scanner(file);
 			while (myReader.hasNextLine()) {
 				String data = myReader.nextLine();
@@ -438,7 +436,7 @@ public class Planner{
 
 	public static void writeFile(String username, String password, String firstName, String lastName, String email) {
 		try {
-			File file = new File("userData.txt");
+			File file = new File("SJSUCoursePlanner/userData.txt");
 			if (file.createNewFile()) {
 				System.out.println("File created: " + file.getName());
 			} else {
@@ -450,8 +448,8 @@ public class Planner{
 		}
 
 		try {
-			FileWriter writer = new FileWriter("userData.txt", true);
-			writer.write(username + " " + password + " " + firstName + " " + lastName + " " + email);
+			FileWriter writer = new FileWriter("SJSUCoursePlanner/userData.txt", true);
+			writer.write(username + " " + encryptPassword(password) + " " + firstName + " " + lastName + " " + email);
 			writer.write(System.getProperty("line.separator"));
 			writer.close();
 			System.out.println("Successfully wrote to the file.");
@@ -461,9 +459,64 @@ public class Planner{
 		}
 	}
 
+	public static String encryptPassword(String password){
+		String new_password = "";
+		Queue<String> queue = new LinkedList<>();
+
+		for(int i = 0; i < password.length(); i++)
+			queue.add(password.substring(i, i+1));
+
+		Set<Integer> positions = Stream.of(0, 1, 3, 4, 6, 7, 8, 10, 12, 14, 15, 17, 19, 21, 23, 24, 27, 29, 33, 36, 38, 42, 47).collect(Collectors.toSet());
+		String randomString = UUID.randomUUID().toString().replaceAll("-", "");
+		
+		for(int i = 0; i < 50; i++){
+			if(positions.contains(i))
+				try{
+					new_password += randomString.substring(i, i + 1);
+				}
+				catch(Exception e){
+					System.out.println("failed in adding from queue");
+				}
+			else{
+				try{
+					new_password += queue.remove();
+				}
+				catch(Exception e){
+					System.out.println("failed in adding from queue");
+				}
+			}
+				
+		}
+
+		return new_password;
+	}
+
+	public static String decryptPassword(String entered_password, String stored_password){
+		Set<Integer> positions = Stream.of(0, 1, 3, 4, 6, 7, 8, 10, 12, 14, 15, 17, 19, 21, 23, 24, 27, 29, 33, 36, 38, 42, 47).collect(Collectors.toSet());
+		Queue<String> queue = new LinkedList<>();
+
+		for(int i = 0; i < entered_password.length(); i++)
+			queue.add(entered_password.substring(i, i+1));
+
+		String password = "";
+		for(int i = 0; i < 50; i++){
+			if(!positions.contains(i)){
+				try{
+					if(stored_password.substring(i, i+1).equals(queue.peek())){
+						password += queue.remove();
+					}
+				}
+				catch(Exception e){
+					System.out.println("failed to add to password");
+				}
+			}
+		}
+		return password;
+	}
+
 	public static void createStudentFile(String username) {
 		try {
-			File file = new File(username + ".txt");
+			File file = new File("SJSUCoursePlanner/StudentCourses/" + username + ".txt");
 			if (file.createNewFile()) {
 				System.out.println("File created: " + file.getName());
 			} else {
@@ -500,6 +553,7 @@ public class Planner{
 			String[] fields = currentLine.split(" ");
 			String currentUsername = fields[0];
 			String currentPassword = fields[1];
+			currentPassword = decryptPassword(password, currentPassword);
 
 			if (username.equals(currentUsername))
 				userExists = true;
@@ -560,7 +614,7 @@ public class Planner{
 			throw new Minimum8CharactersRequired();
 	}
 
-	public static ArrayList<String> getUsers(){
+	public static ArrayList<String> getUsers() {
 		return users;
 	}
 

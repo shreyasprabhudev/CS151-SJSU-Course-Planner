@@ -279,24 +279,14 @@ MATH 203 - Applied Mathematics, Computation, and Statistics Projects (may be use
 ---------------------------------------------------------------------
 ELECTRICAL ENG Courses
 
-MAJOR PREPARATION (33 UNITS)
 CHEM 1A - General Chemistry (B1+B3) unit(s) 5
 ENGL 1B - Argument and Analysis (C2) (or equivalent second semester composition course.) unit(s) 3
-MATH 30 - Calculus I
-(B4) (or
-MATH 30X)
-unit(s) 3
-MATH 31 - Calculus II
-(B4) (or 
-MATH 31X)
-unit(s) 4
-MATH 32 - Calculus III
-(B4) (or 
-MATH 32H or MATH 32X)
-unit(s) 3
+MATH 30 - Calculus I (B4) (or MATH 30X) unit(s) 3
+MATH 31 - Calculus II (B4) (or MATH 31X) unit(s) 4
+MATH 32 - Calculus III (B4) (or 
+MATH 32H or MATH 32X) unit(s) 3
 MATH 33A - Ordinary Differential Equations for SCI & ENGR  OR
-MATH 33LA - Differential Equations and Linear Algebra
-unit(s) 3
+MATH 33LA - Differential Equations and Linear Algebra unit(s) 3
 PHYS 50 - General Physics/Mechanics (B1+B3) unit(s) 4
 PHYS 51 - General Physics/Electricity and Magnetism (B1+B3) unit(s) 4
 PHYS 52 - General Physics/Waves, Light, Heat (B1+B3) unit(s) 4
