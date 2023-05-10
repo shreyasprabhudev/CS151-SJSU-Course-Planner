@@ -75,14 +75,12 @@ As administrations, they will be able to:
 # Solution
 The proposed course planning website will provide a comprehensive platform for students to plan and organize their courses and also view who their advisor is. Features include viewing each major and its corresponding courses and being able to add or remove courses into their planner. Users will be able to select a role and by their user type, a unique ID will be generated based on their role type. We began by first creating the front end, getting our login and sign up page to work as well as storing each user’s information in a txt file. We then developed smaller components and began to implement the classes for each user and the different screens depending on the user type. Then, we planned how to connect all the pages together to get the GUI and backend working along with each other while implementing the needed methods for each class. 
 
-# Steps to Run Code
+# Steps to Run Code on VSCode
 1. Go to github link: https://github.com/shreyasprabhudev/CS151-SJSU-Course-Planner and copy link to clone
-2. Open Eclipse. Select Import and under Git folder select Projects from Git (with smart import)
-3. Select clone URI and select Next and in Branch Selection select Next without changing anything
-4. Select a directory and make sure both folders are selected and press Finish.
-5. In SJSUCoursePlanner, go to src/plannerWeb/Planner and press Run.
-6. To create a Student/Admin/Advisor Account, go to Sign Up → Student/Admin/Advisor → Enter Details
-7. To login with existing credentials, use the username that was generated for you and your password (if you cannot remember your credentials, you can check the userData.txt file 😀)
+2. Open VSCode. Select Clone Git Repository and select folder where you want to save the project
+3. Go to SJSUCoursePlanner, go to src/plannerWeb/Planner and press Run.
+4. To create a Student/Admin/Advisor Account, go to Sign Up → Student/Admin/Advisor → Enter Details
+5. Log in with your created credentials
 
 # Snapshots of Running Program
 Note: Due to the sheer amount of screens due to the numerous options each user have, only the home page, sign up page, and dashboard screens will be shown here.
